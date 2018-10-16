@@ -6,9 +6,9 @@
  * @flow
  */
 
-import React, {Component} from 'react';
-import {Platform, StyleSheet, Text, View} from 'react-native';
-import Auth from './src/containers/Auth';
+import React, { Component } from 'react';
+import { Platform, StyleSheet, Text, View } from 'react-native';
+import { LoginComponent } from './src/containers/Auth';
 // import Splash from './src/containers/Auth';
 
 const instructions = Platform.select({
@@ -19,12 +19,12 @@ const instructions = Platform.select({
 });
 
 
-export default class App extends Component{
+export default class App extends Component {
   render() {
     return (
       // <Text>Sample Text</Text>
       // <Splash/>
-      <Auth/>
+      <LoginComponent />
     );
   }
 }

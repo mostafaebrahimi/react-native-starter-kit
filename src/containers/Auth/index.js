@@ -1,3 +1,12 @@
+import LoginComponent from './LoginComponent';
+import StudentComponent from './Register/StudentComponent';
+import TeacherComponent from './Register/TeacherComponent';
 
-import Auth from './AuthComponent';
-export default Auth;
+export {
+    LoginComponent,
+    StudentComponent,
+    TeacherComponent
+}
+
+
+
