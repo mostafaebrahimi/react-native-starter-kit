@@ -5,8 +5,25 @@ import { Toast } from 'antd-mobile-rn'
 import { Colors, Images, Strings } from '../../config'
 import style from './Style'
 import { Button, Item, Input, Title, Subtitle } from 'native-base'
+import { connect } from 'react-redux'
 
-export default class LoginComponent extends Component {
+const mapStateToProps = (state) => {
+    return {
+
+    }
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+
+    }
+}
+
+class LoginScreen extends Component {
+    static navigationOptions = {
+        header: null
+    }
+
     constructor(props) {
         super(props)
 
@@ -26,13 +43,13 @@ export default class LoginComponent extends Component {
         this.setState({ isLoading: true })
         setTimeout(function () {
             that.setState({ isLoading: false })
+            that.props.navigation.navigate('Register')
         }, 5000)
     }
 
     changeInputValue(value) {
         this.setState({ phone: value })
     }
-
 
     changePhoneNumber(text) {
         if (text.length <= 11)
@@ -41,9 +58,7 @@ export default class LoginComponent extends Component {
     }
 
     render() {
-
         return (
-
             <View style={{ flex: 1 }}>
                 <BackgroundImage>
                     <View style={[style.darkBoxWithOpacity]}>
@@ -76,7 +91,9 @@ export default class LoginComponent extends Component {
                     </View>
                 </BackgroundImage>
             </View>
-
         )
     }
 }
+
+const LoginScreenConnect = connect(mapStateToProps, mapDispatchToProps)(LoginScreen)
+export default LoginScreenConnect

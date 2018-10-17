@@ -8,8 +8,12 @@
 
 import React, { Component } from 'react';
 import { Platform, StyleSheet, Text, View } from 'react-native';
-import { LoginComponent } from './src/containers/Auth';
+// import { LoginComponent } from './src/containers/Auth';
 // import Splash from './src/containers/Auth';
+
+import store from './src/redux'
+import RootNavigator from './src/navigation/Navigation'
+import { Provider } from 'react-redux'
 
 const instructions = Platform.select({
   ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
@@ -22,9 +26,9 @@ const instructions = Platform.select({
 export default class App extends Component {
   render() {
     return (
-      // <Text>Sample Text</Text>
-      // <Splash/>
-      <LoginComponent />
+      <Provider store={store}>
+        <RootNavigator />
+      </Provider>
     );
   }
 }

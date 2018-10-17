@@ -1,9 +1,9 @@
-import LoginComponent from './LoginComponent';
+import LoginScreen from './LoginScreen';
 import StudentComponent from './Register/StudentComponent';
 import TeacherComponent from './Register/TeacherComponent';
 
 export {
-    LoginComponent,
+    LoginScreen,
     StudentComponent,
     TeacherComponent
 }
