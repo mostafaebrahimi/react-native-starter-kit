@@ -7,9 +7,9 @@ import style from "./Style";
 import { Button, Item, Input, Title, Subtitle } from "native-base";
 import { connect } from "react-redux";
 import {
-  increamentCounter,
-  decreamentCounter
+  AuthActionsGenerator
 } from "../../redux/reducers/Auth";
+
 
 const mapStateToProps = state => {
   return {
@@ -19,7 +19,9 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    inc: () => dispatch(increamentCounter())
+    inc: () => dispatch(AuthActionsGenerator.auth.counter.inc())
+    // ,
+    // login: loginInfo => dispatch(login(loginInfo))
   };
 };
 
@@ -35,17 +37,27 @@ class LoginScreen extends Component {
       phone: "",
       isLoading: false
     };
-    this.changeInputValue = this.changeInputValue.bind(this);
-    this.submitPhoneNumber = this.submitPhoneNumber.bind(this);
+    this.changeUserNameValue = this.changeUserNameValue.bind(this);
+    this.changePasswordValue = this.changePasswordValue.bind(this);
+    this.submitForm = this.submitForm.bind(this);
+  }
+
+  changeUserNameValue(value) {
+    this.setState({ username: value });
+  }
+
+  changePasswordValue(value) {
+    this.setState({ password: value });
   }
 
   componentDidMount() {
-    console.log(increamentCounter());
-    console.log(decreamentCounter());
+    // console.log();
+    // console.log(increamentCounter());
+    // console.log(decreamentCounter());
     this.props.inc();
   }
 
-  submitPhoneNumber() {
+  submitForm() {
     let that = this;
     Toast.info("this is toast");
     console.log(this.state);
@@ -54,15 +66,6 @@ class LoginScreen extends Component {
       that.setState({ isLoading: false });
       that.props.navigation.navigate("Register");
     }, 5000);
-  }
-
-  changeInputValue(value) {
-    this.setState({ phone: value });
-  }
-
-  changePhoneNumber(text) {
-    if (text.length <= 11) this.setState({ phone: text });
-    else Toast.fail("Phone number length  must be less than 11");
   }
 
   render() {
@@ -81,16 +84,21 @@ class LoginScreen extends Component {
                   {Strings.splash.Please_Enter_Your_Phone_Number_to_Continue}
                 </Subtitle>
               </View>
+
               <Item style={style.ItemStyle}>
                 <Input
+                  onChangeText={this.changeUserNameValue}
                   placeholderTextColor={Colors.placeHolderColor}
                   placeholder={Strings.splash.usernameInput}
+                  value={this.state.username || ""}
                   style={style.textInput}
                 />
               </Item>
               <Item style={style.ItemStyle}>
                 <Input
+                  onChangeText={this.changePasswordValue}
                   secureTextEntry={true}
+                  value={this.state.password || ""}
                   placeholderTextColor={Colors.placeHolderColor}
                   placeholder={Strings.splash.passwordInput}
                   style={style.textInput}
