@@ -7,10 +7,11 @@ export default (AuthApi = {
   },
   registerTeacher: function() {},
   login: function(data) {
-    let username = data.payload.username;
-    let password = data.payload.password;
-    axios
-      .get(URLs.login)
+    return axios
+      .post(URLs.login, {
+        email: data.payload.username,
+        password: data.payload.password
+      })
       .then(response => response.data)
       .catch(err => {
         throw err;
