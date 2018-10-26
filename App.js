@@ -12,7 +12,8 @@ import { Platform, StyleSheet, Text, View } from 'react-native';
 // import Splash from './src/containers/Auth';
 
 import store from './src/redux'
-import RootNavigator from './src/navigation/Navigation'
+// import RootNavigator from './src/navigation/Navigation'
+import { LoginScreen } from './src/containers/Auth'
 import { Provider } from 'react-redux'
 
 const instructions = Platform.select({
@@ -27,7 +28,7 @@ export default class App extends Component {
   render() {
     return (
       <Provider store={store}>
-        <RootNavigator />
+        <LoginScreen />
       </Provider>
     );
   }

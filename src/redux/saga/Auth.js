@@ -1,29 +1,69 @@
 import { call, put, takeEvery, takeLatest } from "redux-saga/effects";
+import { AuthActionsGenerator } from "../reducers/Auth";
+import AuthApi from "../api/AuthApi";
+import Storage from "react-native-storage";
+import { AsyncStorage } from "react-native";
 
-function* login(action) {
+var storage = new Storage({
+  storageBackend: AsyncStorage,
+  defaultExpires: null
+});
+
+function* loginWorker(action) {
   try {
-    const user = yield call(
-      Api.fetchUser,
-      action.payload
-    );
-    yield put();
+    yield put(AuthActionsGenerator.auth.login.isfetching());
+    const res = yield call(AuthApi.login, action.payload);
+    storage.save({
+      key: "token",
+      data: { token: res.token }
+    });
+    yield put(AuthActionsGenerator.auth.login.response(res));
   } catch (e) {
-    yield put();
+    yield put(AuthActionsGenerator.auth.login.error(e));
   }
 }
 
-
-function* registerStudentWorker(action){
-    try{
-        const user = yield call(AuthApi.registerStudent,action.payload)
-        yield put()
-    }
-    catch(e){
-        console.log(e)
-    }
+export function* loginWatcher(action) {
+  // console.error("this is sample demo");
+  yield takeEvery(AuthActionsGenerator.auth.login.call, loginWorker);
 }
 
+function* registerTeacherWorker(action) {
+  try {
+    console.log(action);
+    const user = yield call(AuthApi.registerTeacher, action.payload);
+    console.log(user);
+    yield put(AuthActionsGenerator.auth.register.teacher.response(user));
+  } catch (e) {
+    console.log(e);
+    yield put(AuthActionsGenerator.auth.register.teacher.error(e));
+    console.log(e);
+  }
+}
 
-function* registerStudentWatcher(){
-   yield takeLatest() 
+export function* registerTeacherWatcher() {
+  yield takeLatest(
+    AuthActionsGenerator.auth.register.teacher.call,
+    registerTeacherWorker
+  );
+}
+
+function* registerStudentWorker(action) {
+  try {
+    console.log(action);
+    const user = yield call(AuthApi.registerStudent, action.payload);
+    console.log(user);
+    yield put(AuthActionsGenerator.auth.register.student.response(user));
+  } catch (e) {
+    console.log(e);
+    yield put(AuthActionsGenerator.auth.register.student.error(e));
+    console.log(e);
+  }
+}
+
+export function* registerStudentWatcher() {
+  yield takeLatest(
+    AuthActionsGenerator.auth.register.student.call,
+    registerStudentWorker
+  );
 }

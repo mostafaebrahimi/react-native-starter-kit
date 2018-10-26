@@ -1,25 +1,31 @@
 import React, { Component } from "react";
-import { View, Text, Image, Dimensions, TouchableOpacity } from "react-native";
+import {
+  View,
+  Text,
+  Image,
+  Dimensions,
+  TouchableOpacity,
+  ActivityIndicator
+} from "react-native";
 import BackgroundImage from "../../components/BackgroundImage";
 import { Toast } from "antd-mobile-rn";
 import { Colors, Images, Strings } from "../../config";
 import style from "./Style";
 import { Button, Item, Input, Title, Subtitle } from "native-base";
 import { connect } from "react-redux";
-import {
-  AuthActionsGenerator
-} from "../../redux/reducers/Auth";
-
+import { AuthActionsGenerator } from "../../redux/reducers/Auth";
 
 const mapStateToProps = state => {
   return {
-    mystate: state
+    auth: state.auth
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    inc: () => dispatch(AuthActionsGenerator.auth.counter.inc())
+    inc: () => dispatch(AuthActionsGenerator.auth.counter.inc()),
+    login: payload => dispatch(AuthActionsGenerator.auth.login.call(payload)),
+    action: () => dispatch({ type: "action" })
     // ,
     // login: loginInfo => dispatch(login(loginInfo))
   };
@@ -34,12 +40,17 @@ class LoginScreen extends Component {
     super(props);
 
     this.state = {
-      phone: "",
-      isLoading: false
+      username: "",
+      password: "",
+      isLoading: props.auth.login.isFetching
     };
     this.changeUserNameValue = this.changeUserNameValue.bind(this);
     this.changePasswordValue = this.changePasswordValue.bind(this);
     this.submitForm = this.submitForm.bind(this);
+  }
+
+  componentWillReceiveProps() {
+    this.setState({ isLoading: this.props.auth.login.isFetching });
   }
 
   changeUserNameValue(value) {
@@ -58,6 +69,23 @@ class LoginScreen extends Component {
   }
 
   submitForm() {
+    if (this.state.username.length <= 0) {
+      Toast.info("Please enter username");
+      return;
+    }
+    if (this.state.password.length <= 0) {
+      Toast.info("Please enter password");
+      return;
+    }
+    let login = {
+      username: this.state.username,
+      password: this.state.password
+    };
+
+    this.props.login(login);
+    // this.props.action();
+
+    /*
     let that = this;
     Toast.info("this is toast");
     console.log(this.state);
@@ -66,9 +94,11 @@ class LoginScreen extends Component {
       that.setState({ isLoading: false });
       that.props.navigation.navigate("Register");
     }, 5000);
+    */
   }
 
   render() {
+    let { isFetching } = this.props.auth.login;
     return (
       <View style={{ flex: 1 }}>
         <BackgroundImage>
@@ -107,13 +137,22 @@ class LoginScreen extends Component {
               <TouchableOpacity
                 style={[style.submitButton]}
                 loading={this.state.isLoading}
-                onPress={this.submitPhoneNumber}
+                onPress={this.submitForm}
               >
                 <Text style={style.submitButtonText}>
                   {Strings.splash.submit}
                 </Text>
               </TouchableOpacity>
             </View>
+            {this.props.auth.login.isFetching ? (
+              <ActivityIndicator
+                size="large"
+                animating={true}
+                color={Colors.indicator}
+              />
+            ) : (
+              <View />
+            )}
           </View>
         </BackgroundImage>
       </View>

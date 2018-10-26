@@ -1,5 +1,6 @@
 const colors = {
     placeHolderColor: "#FFF",
+    indicator: "#FFF",
     splash: {
         ItemStyleBackground: 'rgba(255,255,255,0.8)',
         submitButton:{

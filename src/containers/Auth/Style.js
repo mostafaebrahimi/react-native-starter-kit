@@ -79,6 +79,9 @@ const style = StyleSheet.create({
         fontSize: 30,
         alignSelf: 'center',
         fontWeight: 'bold'
+    },
+    spinnerTextStyle:{
+        color: "#ffffff"
     }
 });
 
