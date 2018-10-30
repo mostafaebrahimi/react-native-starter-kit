@@ -8,7 +8,11 @@ class Second extends Component {
   }
 
   render() {
-    return <View style={style.tabsScreen} />;
+    return (
+      <View style={style.tabsScreen}>
+        <Text>Second Tab</Text>
+      </View>
+    );
   }
 }
 

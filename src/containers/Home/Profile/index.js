@@ -3,15 +3,14 @@ import { View, Text } from "react-native";
 import style, { width } from "./style";
 import ProfileImage from "./ProfileImage";
 import { TabView, TabBar, SceneMap } from "react-native-tab-view";
-import { First, Second } from "./Tabs";
-
-// const FirstRoute = () => (
-  
-// );
-// const SecondRoute = () => (
-//   <View style={[{ backgroundColor: "#673ab7", height: 150 }]} />
-// );
-
+import { MyCourses, Second } from "./Tabs";
+import { connect } from "react-redux";
+const mapStateToProps = state => {
+  return {};
+};
+const mapDispatchToProps = dispatch => {
+  return {};
+};
 class ProfileComponent extends Component {
   static navigationOptions = {
     header: null
@@ -22,8 +21,8 @@ class ProfileComponent extends Component {
     this.state = {
       index: 0,
       routes: [
-        { key: "first", title: "First" },
-        { key: "second", title: "Second" }
+        { key: "first", title: "Courses" },
+        { key: "second", title: "Informations" }
       ]
     };
   }
@@ -44,12 +43,16 @@ class ProfileComponent extends Component {
       <View style={style.mainContainer}>
         <View style={style.topHalf}>
           <ProfileImage />
+          <Text style={style.profileName}>Mostafa Ebrahimi</Text>
+          <Text style={style.subTitle}>
+            {this.props.isTeacher ? "Teacher" : "Student"}
+          </Text>
         </View>
         <TabView
           style={style.bottomHalf}
           navigationState={this.state}
           renderScene={SceneMap({
-            first: First,
+            first: MyCourses,
             second: Second
           })}
           renderTabBar={this._renderTabBar}
@@ -61,5 +64,8 @@ class ProfileComponent extends Component {
     );
   }
 }
-
-export default ProfileComponent;
+const ProfileComponentConnect = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ProfileComponent);
+export default ProfileComponentConnect;

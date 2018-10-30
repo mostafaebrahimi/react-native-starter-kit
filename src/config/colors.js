@@ -9,7 +9,7 @@ const colors = {
     }
   },
   home: {
-    titleColor: "#333333"
+    titleColor: "#A9A9A9"
   }
 };
 

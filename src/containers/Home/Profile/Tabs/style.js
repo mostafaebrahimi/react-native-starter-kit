@@ -7,6 +7,7 @@ const height = Dimensions.get("window").height;
 const style = StyleSheet.create({
   tabsScreen: {
     flex: 1,
+    color: "#000",
     backgroundColor: "#fff"
   }
 });

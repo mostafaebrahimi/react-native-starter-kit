@@ -8,12 +8,14 @@ const style = StyleSheet.create({
   title: {
     fontWeight: "bold",
     fontSize: 25,
-    color: Colors.titleColor
+    // fontStyle: "italic",
+    color: Colors.home.titleColor
   },
   textCenter: {
     flex: 1,
     flexDirection: "row",
-    justifyContent: "center",
+    paddingLeft: 5,
+    // justifyContent: "center"
     alignContent: "center"
   }
 });
