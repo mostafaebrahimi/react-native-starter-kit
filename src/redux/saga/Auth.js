@@ -1,5 +1,5 @@
 import { call, put, takeEvery, takeLatest } from "redux-saga/effects";
-import { AuthActionsGenerator } from "../reducers/Auth";
+import Auth, { AuthActionsGenerator } from "../reducers/Auth";
 import AuthApi from "../api/AuthApi";
 import Storage from "react-native-storage";
 import { AsyncStorage } from "react-native";
@@ -30,14 +30,15 @@ export function* loginWatcher(action) {
 
 function* registerTeacherWorker(action) {
   try {
-    console.log(action);
-    const user = yield call(AuthApi.registerTeacher, action.payload);
-    console.log(user);
-    yield put(AuthActionsGenerator.auth.register.teacher.response(user));
+    yield put(AuthActionsGenerator.auth.register.isfetching());
+    const res = yield call(AuthApi.registerTeacher, action.payload);
+    storage.save({
+      key: "token",
+      data: { token: res.token }
+    });
+    yield put(AuthActionsGenerator.auth.register.teacher.response(res));
   } catch (e) {
-    console.log(e);
     yield put(AuthActionsGenerator.auth.register.teacher.error(e));
-    console.log(e);
   }
 }
 
@@ -51,13 +52,14 @@ export function* registerTeacherWatcher() {
 function* registerStudentWorker(action) {
   try {
     console.log(action);
-    const user = yield call(AuthApi.registerStudent, action.payload);
-    console.log(user);
+    const res = yield call(AuthApi.registerStudent, action.payload);
+    storage.save({
+      key: "token",
+      data: { token: res.token }
+    });
     yield put(AuthActionsGenerator.auth.register.student.response(user));
   } catch (e) {
-    console.log(e);
     yield put(AuthActionsGenerator.auth.register.student.error(e));
-    console.log(e);
   }
 }
 

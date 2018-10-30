@@ -46,6 +46,8 @@ class LoginScreen extends Component {
     };
     this.changeUserNameValue = this.changeUserNameValue.bind(this);
     this.changePasswordValue = this.changePasswordValue.bind(this);
+    this.navigateToRegisterStudent = this.navigateToRegisterStudent.bind(this);
+    this.navigateToRegisterTeacher = this.navigateToRegisterTeacher.bind(this);
     this.submitForm = this.submitForm.bind(this);
   }
 
@@ -69,6 +71,7 @@ class LoginScreen extends Component {
   }
 
   submitForm() {
+    /*
     if (this.state.username.length <= 0) {
       Toast.info("Please enter username");
       return;
@@ -77,12 +80,14 @@ class LoginScreen extends Component {
       Toast.info("Please enter password");
       return;
     }
+    */
     let login = {
       username: this.state.username,
       password: this.state.password
     };
 
-    this.props.login(login);
+    // this.props.login(login);
+    this.props.navigation.replace("Home");
     // this.props.action();
 
     /*
@@ -97,6 +102,14 @@ class LoginScreen extends Component {
     */
   }
 
+  navigateToRegisterStudent() {
+    this.props.navigation.navigate("RegisterStudent");
+  }
+
+  navigateToRegisterTeacher() {
+    this.props.navigation.navigate("RegisterTeacher");
+  }
+
   render() {
     let { isFetching } = this.props.auth.login;
     return (
@@ -107,6 +120,7 @@ class LoginScreen extends Component {
               <Image source={Images.splash.logo} style={style.logo} />
               <Text style={style.AppName}>{Strings.APP_NAME}</Text>
             </View>
+
             <View style={[style.textInputContainer]}>
               <View>
                 <Title>{Strings.splash.SIGN_UP_TO_MOON_LESSON}</Title>
@@ -143,6 +157,23 @@ class LoginScreen extends Component {
                   {Strings.splash.submit}
                 </Text>
               </TouchableOpacity>
+            </View>
+            <View style={style.registerLink}>
+              <Text style={{ color: "#fff" }}>Don't have account?</Text>
+              <View style={{ flexDirection: "row" }}>
+                <Text
+                  onPress={this.navigateToRegisterStudent}
+                  style={[style.link, { marginRight: 5 }]}
+                >
+                  Student
+                </Text>
+                <Text
+                  onPress={this.navigateToRegisterTeacher}
+                  style={style.link}
+                >
+                  Teacher
+                </Text>
+              </View>
             </View>
             {this.props.auth.login.isFetching ? (
               <ActivityIndicator
