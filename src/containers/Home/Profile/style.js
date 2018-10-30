@@ -5,7 +5,12 @@ const width = Dimensions.get("window").width;
 const height = Dimensions.get("window").height;
 
 const style = StyleSheet.create({
-  listItem: {}
+  listItem: {},
+  image: {
+    alignSelf: "center",
+    width: 150,
+    height: 150
+  }
 });
 
 export default style;
