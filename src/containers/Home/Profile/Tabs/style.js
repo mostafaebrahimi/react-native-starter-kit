@@ -51,17 +51,17 @@ const style = StyleSheet.create({
     padding: 10
   },
   informationRow: {
-    flex: 1,
+    flex: 10,
     marginTop: 8,
     flexDirection: "row"
   },
   informationRow_title: {
-    flex: 0.5,
+    flex: 4,
     fontSize: 16,
     fontWeight: "bold"
   },
   informationRow_info: {
-    flex: 0.6,
+    flex: 6,
     fontSize: 16,
     fontWeight: "normal"
   },

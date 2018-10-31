@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { View, Text, TouchableNativeFeedback } from "react-native";
+import { View, Text, TouchableWithoutFeedback } from "react-native";
 import style from "./style";
 import ImageLoad from "react-native-image-placeholder";
 import { connect } from "react-redux";
@@ -33,7 +33,7 @@ class MyCourses extends Component {
     // if (!_.isUndefined(courses) && courses.length > 0) {
     return (
       <View style={style.tabsScreen}>
-        <TouchableNativeFeedback onPress={this._changeToDetailsRoute}>
+        <TouchableWithoutFeedback onPress={this._changeToDetailsRoute}>
           <View>
             <SingleCourse
               courseName={"More than vver course"}
@@ -41,7 +41,7 @@ class MyCourses extends Component {
               startDate={"10/9/2018"}
             />
           </View>
-        </TouchableNativeFeedback>
+        </TouchableWithoutFeedback>
       </View>
     );
     // }

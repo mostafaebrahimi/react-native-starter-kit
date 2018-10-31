@@ -8,7 +8,7 @@ import {
   TeacherComponent
 } from "../containers/Auth";
 import Home from "../containers/Home";
-import Course from "../containers/Home/Courses/Course";
+import Course from "../containers/Home/Courses/CourseDetails"
 
 const RootNavigator = createStackNavigator(
   {

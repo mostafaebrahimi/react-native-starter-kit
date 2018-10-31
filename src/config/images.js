@@ -6,6 +6,10 @@ const images = {
   home: {
     empty: require("../../images/course.png")
     // headerLogo: require('../../images/logotitle.png')
+  },
+  courses: {
+    teacher: require("../../images/teacher.png"),
+    data: require("../../images/date.png")
   }
 };
 
