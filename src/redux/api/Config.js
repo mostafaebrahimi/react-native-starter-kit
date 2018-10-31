@@ -5,7 +5,10 @@ const Config = {
     student: rootPath + "register/student",
     teacher: rootPath + "register/teacher"
   },
-  students: rootPath + "students"
+  students: rootPath + "students",
+  profile: {
+    courses_list: rootPath + "/courses"
+  }
 };
 
 export function getHeaderBasedOnToken(token) {

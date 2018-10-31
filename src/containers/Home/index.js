@@ -9,7 +9,12 @@ import Header from "../Layouts/Header";
 
 const bottomNavigation = createBottomTabNavigator(
   {
-    Courses,
+    Courses: {
+      screen: Courses,
+      navigationOptions: {
+        title: "Explore"
+      }
+    },
     Profile
   },
   {
@@ -46,7 +51,11 @@ bottomNavigation.navigationOptions = ({ navigation }) => {
   const { routeName } = routes[index];
   //multiple states handled.
   //uncomment to change
+
+  // let title = routeName === "Profile" ? "Profile" : "Explore";
+
   return {
+    // title,
     // header: null
     // headerLeft: <Text>Left</Text>,
     headerTitle: <Header />

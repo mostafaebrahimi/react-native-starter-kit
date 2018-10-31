@@ -1,6 +1,8 @@
 import React, { Component } from "react";
-import { View, Text } from "react-native";
+import { View, Text, ScrollView } from "react-native";
 import style from "./style";
+import Card from "./Card";
+import InformationRow from "./InformationRow";
 class Second extends Component {
   constructor(props) {
     super(props);
@@ -9,9 +11,18 @@ class Second extends Component {
 
   render() {
     return (
-      <View style={style.tabsScreen}>
-        <Text>Second Tab</Text>
-      </View>
+      <ScrollView style={style.tabsScreen}>
+        <Card title={"Account"}>
+          <View>
+            <InformationRow title={"Username"} info={"mostafaebra"} />
+            <InformationRow
+              title={"Email"}
+              info={"mostafaebrahimi.me@gmail.com"}
+            />
+            <InformationRow title={"Phone Number"} info={"09172195514"} />
+          </View>
+        </Card>
+      </ScrollView>
     );
   }
 }
