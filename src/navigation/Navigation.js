@@ -8,15 +8,18 @@ import {
   TeacherComponent
 } from "../containers/Auth";
 import Home from "../containers/Home";
+import Course from "../containers/Home/Courses/Course";
 
 const RootNavigator = createStackNavigator(
   {
     Login: LoginScreen,
     RegisterStudent: StudentComponent,
     RegisterTeacher: TeacherComponent,
-    Home
+    Home,
+    Course
   },
   {
+    headerMode: "screen",
     initialRouteName: "Login"
   }
 );

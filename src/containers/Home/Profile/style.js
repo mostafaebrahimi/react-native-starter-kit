@@ -37,7 +37,7 @@ const style = StyleSheet.create({
   },
   bottomHalf: {
     flex: 0.6,
-    backgroundColor: "#4286f4"
+    backgroundColor: "#fff"
   },
   initialLayout: {
     flex: 1,

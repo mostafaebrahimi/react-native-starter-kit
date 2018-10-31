@@ -4,7 +4,7 @@ import style from "./style";
 
 class CourseList extends Component {
   static navigationOptions = {
-    header: null
+    title: "course name"
   };
 
   constructor(props) {

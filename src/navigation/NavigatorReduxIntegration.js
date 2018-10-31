@@ -16,7 +16,10 @@ const middleware = createReactNavigationReduxMiddleware(
 
 const RootNavigator = createStackNavigator({
     Login: LoginScreen,
-    Register: StudentComponent
+    RegisterStudent: StudentComponent,
+    RegisterTeacher: TeacherComponent,
+    Home,
+    Course
 },
     {
         initialRouteName: 'Login',

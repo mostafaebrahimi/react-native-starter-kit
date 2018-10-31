@@ -56,7 +56,7 @@ const style = StyleSheet.create({
     flexDirection: "row"
   },
   informationRow_title: {
-    flex: 0.4,
+    flex: 0.5,
     fontSize: 16,
     fontWeight: "bold"
   },
@@ -85,6 +85,7 @@ const style = StyleSheet.create({
     height: "100%"
   },
   bodyContainer: {
+    flexDirection: "column",
     padding: 10
   },
   courseImageStyle: {

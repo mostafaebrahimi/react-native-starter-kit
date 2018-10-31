@@ -2,11 +2,20 @@ import React, { Component } from "react";
 import { Text, View, Image } from "react-native";
 import style from "./style";
 import ImageLoad from "react-native-image-placeholder";
-
+import _ from "lodash";
+import InformationRow from "./InformationRow";
 class SingleCourse extends Component {
   constructor(props) {
     super(props);
     this.state = {};
+    this._showMoreText = this._showMoreText.bind(this);
+  }
+
+  _showMoreText(text) {
+    if (!text) return "";
+    return _.isString(text) && text.length < 18
+      ? text
+      : text.substring(0, 18) + "...";
   }
   render() {
     return (
@@ -21,7 +30,17 @@ class SingleCourse extends Component {
           }}
         />
         <View style={style.bodyContainer}>
-          <Text style={style.courseTitle}>{this.props.courseName}</Text>
+          <Text style={style.courseTitle}>
+            {this._showMoreText(this.props.courseName)}
+          </Text>
+          <InformationRow
+            title={"Teacher:"}
+            info={this._showMoreText(this.props.teacher)}
+          />
+          <InformationRow
+            title={"Start Date:"}
+            info={this._showMoreText(this.props.startDate)}
+          />
         </View>
       </View>
     );
