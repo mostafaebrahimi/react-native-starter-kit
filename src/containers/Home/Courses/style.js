@@ -19,8 +19,8 @@ const style = StyleSheet.create({
     elevation: 1,
     backgroundColor: "#fff",
     borderColor: "#000",
-    alignContent: "center",
-    alignItems: "center"
+    alignContent: "center"
+    // alignItems: "center"
   },
   courseImage: {
     width: 160,
@@ -35,22 +35,32 @@ const style = StyleSheet.create({
     height: "100%"
   },
   courseTitle: {
-    fontSize: 18,
-    fontWeight: "300"
+    fontWeight: "bold",
+    fontSize: 18
   },
   info: {
-    flex: 6,
     fontSize: 16,
     marginLeft: 5,
     fontWeight: "normal"
   },
   icon: {
-    width: 15,
-    height: 15
+    justifyContent: "center",
+    alignItems: "center",
+    width: 18,
+    height: 18
   },
   imageInformationRow: {
-    alignItems:"center",
+    marginTop: 5,
+    alignItems: "center",
     flexDirection: "row"
+  },
+  courseDetails: {
+    backgroundColor: "#fff"
+  },
+  detailsTextContainer: {
+    backgroundColor: "#fff",
+    fontSize: 16,
+    padding: 10
   }
 });
 

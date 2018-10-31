@@ -15,10 +15,11 @@ class CourseRow extends Component {
 
   _showMoreText(text) {
     if (!text) return "";
-    return _.isString(text) && text.length < 18
+    return _.isString(text) && text.length <= 20
       ? text
-      : text.substring(0, 18) + "...";
+      : text.substring(0, 20) + "...";
   }
+
   render() {
     return (
       <TouchableWithoutFeedback onPress={this.props.onPress}>
@@ -44,6 +45,8 @@ class CourseRow extends Component {
               img={images.courses.data}
               info={this._showMoreText(this.props.startDate)}
             />
+            <ImageInfoRow img={images.courses.student} info={"20 people"} />
+            <ImageInfoRow img={images.courses.star} info={"5 points"} />
           </View>
         </View>
       </TouchableWithoutFeedback>

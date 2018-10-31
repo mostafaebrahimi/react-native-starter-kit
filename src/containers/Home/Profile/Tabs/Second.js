@@ -14,12 +14,12 @@ class Second extends Component {
       <ScrollView style={style.tabsScreen}>
         <Card title={"Account"}>
           <View>
-            <InformationRow title={"Username"} info={"mostafaebra"} />
+            <InformationRow title={"Username: "} info={"mostafaebra"} />
             <InformationRow
-              title={"Email"}
+              title={"Email: "}
               info={"mostafaebrahimi.me@gmail.com"}
             />
-            <InformationRow title={"Phone Number"} info={"09172195514"} />
+            <InformationRow title={"Phone Number: "} info={"09172195514"} />
           </View>
         </Card>
       </ScrollView>

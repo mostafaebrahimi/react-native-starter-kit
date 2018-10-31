@@ -9,7 +9,9 @@ const images = {
   },
   courses: {
     teacher: require("../../images/teacher.png"),
-    data: require("../../images/date.png")
+    data: require("../../images/date.png"),
+    student: require("../../images/cap.png"),
+    star: require("../../images/star.png")
   }
 };
 

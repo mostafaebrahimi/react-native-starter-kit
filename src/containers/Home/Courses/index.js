@@ -5,7 +5,12 @@ import CourseRow from "./CourseRow";
 import NavigationService from "../../../navigation/NavigationService";
 const data = [
   {
-    courseName: "Tarrahi Algorithem",
+    courseName: "Tarrahi Algo",
+    startDate: "19/10/2018",
+    teacher: "Ali Ebrahimi"
+  },
+  {
+    courseName: "Tarrahi Arithem",
     startDate: "19/10/2018",
     teacher: "Ali Ebrahimi"
   },
@@ -15,12 +20,7 @@ const data = [
     teacher: "Ali Ebrahimi"
   },
   {
-    courseName: "Tarrahi Algorithem",
-    startDate: "19/10/2018",
-    teacher: "Ali Ebrahimi"
-  },
-  {
-    courseName: "Tarrahi Algorithem",
+    courseName: "Tarrahi   Algorithem",
     startDate: "19/10/2018",
     teacher: "Ali Ebrahimi"
   }
@@ -36,8 +36,10 @@ class Courses extends Component {
     this._onCardPress = this._onCardPress.bind(this);
   }
 
-  _onCardPress() {
-    NavigationService.navigateTopStack("Course");
+  _onCardPress(item) {
+    return function() {
+      NavigationService.navigateTopStack("Course", { title: item.courseName });
+    };
   }
 
   render() {
@@ -50,19 +52,11 @@ class Courses extends Component {
               teacher={item.teacher}
               courseName={item.courseName}
               startDate={item.startDate}
-              onPress={this._onCardPress}
+              onPress={this._onCardPress(item)}
             />
           )}
         />
       </View>
-      // <ScrollView>
-      //   <List>
-      //     <FlatList
-      //       data={[1, 2, 34, 4, 5, 6]}
-      //       renderItem={({ item }) => <CourseRow />}
-      //     />
-      //   </List>
-      // </ScrollView>
     );
   }
 }

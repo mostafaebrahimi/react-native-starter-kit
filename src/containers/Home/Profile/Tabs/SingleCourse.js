@@ -13,10 +13,11 @@ class SingleCourse extends Component {
 
   _showMoreText(text) {
     if (!text) return "";
-    return _.isString(text) && text.length < 18
+    return _.isString(text) && text.length <= 20
       ? text
-      : text.substring(0, 18) + "...";
+      : text.substring(0, 20) + "...";
   }
+
   render() {
     return (
       <View style={style.courseViewContainer}>
@@ -34,11 +35,11 @@ class SingleCourse extends Component {
             {this._showMoreText(this.props.courseName)}
           </Text>
           <InformationRow
-            title={"Teacher:"}
+            title={"Teacher: "}
             info={this._showMoreText(this.props.teacher)}
           />
           <InformationRow
-            title={"Start Date:"}
+            title={"Start Date: "}
             info={this._showMoreText(this.props.startDate)}
           />
         </View>

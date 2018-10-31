@@ -52,16 +52,15 @@ const style = StyleSheet.create({
   },
   informationRow: {
     flex: 10,
-    marginTop: 8,
+    marginTop: 4,
     flexDirection: "row"
   },
   informationRow_title: {
-    flex: 4,
     fontSize: 16,
     fontWeight: "bold"
   },
   informationRow_info: {
-    flex: 6,
+    flex: 1,
     fontSize: 16,
     fontWeight: "normal"
   },
