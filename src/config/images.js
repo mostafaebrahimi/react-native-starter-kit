@@ -11,7 +11,8 @@ const images = {
     teacher: require("../../images/teacher.png"),
     data: require("../../images/date.png"),
     student: require("../../images/cap.png"),
-    star: require("../../images/star.png")
+    star: require("../../images/star.png"),
+    class:require("../../images/class.png")
   }
 };
 

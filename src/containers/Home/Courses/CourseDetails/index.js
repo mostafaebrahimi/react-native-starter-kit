@@ -1,9 +1,10 @@
 import React, { Component } from "react";
-import { Text, View, Image, ScrollView, FlatList } from "react-native";
+import { View, Image, ScrollView, FlatList } from "react-native";
 import style from "./style";
 import _ from "lodash";
 import { connect } from "react-redux";
 import Lesson from "./Lesson";
+import { Card, CardItem, Text, Body } from "native-base";
 import data from "./fake";
 import RegisterButton from "./RegisterButton";
 const mapStateToProps = state => {
@@ -36,28 +37,42 @@ class CourseDetails extends Component {
   render() {
     return (
       <ScrollView style={style.courseDetails}>
-        <View style={style.detailsTextContainer}>
-          <Text style={style.infoFontSize}>
-            orem Ipsum is simply dummy text of the printing and typesetting
-            industry. Lorem Ipsum has been the industry's standard dummy text
-            ever since the 1500s, when an unknown printer took a galley of type
-            and scrambled it to make a type specimen book. It has survived not
-            only five centuri
-          </Text>
+        <View style={{ padding: 10 }}>
+          <Card>
+            <CardItem header>
+              <Text>About Course</Text>
+            </CardItem>
+            <CardItem>
+              <Body>
+                <Text>
+                  Lorem Ipsum is simply dummy text of the printing and
+                  typesetting industry. Lorem Ipsum has been the industry's
+                  standard dummy text ever since the 1500s, when an unknown
+                  printer took a galley of type and scrambled it to make a type
+                  specimen book. It has survived not only five centuries, but
+                  also the leap into electronic typesetting, remaining
+                  essentially unchanged. It was pop
+                </Text>
+              </Body>
+            </CardItem>
+          </Card>
+          <Card>
+            <CardItem header>
+              <Text>Lessons</Text>
+            </CardItem>
+            <CardItem>
+              <Body style={{ flex: 1 }}>
+                <FlatList
+                  style={style.flatList}
+                  data={data}
+                  renderItem={({ item }) => (
+                    <Lesson name={item.name} time={item.time} />
+                  )}
+                />
+              </Body>
+            </CardItem>
+          </Card>
         </View>
-        <View
-          style={{
-            borderBottomColor: "#6a6a6a",
-            borderBottomWidth: 0.5
-          }}
-        />
-        <FlatList
-          style={style.flatList}
-          data={data}
-          renderItem={({ item }) => (
-            <Lesson name={item.name} time={item.time} />
-          )}
-        />
       </ScrollView>
     );
   }

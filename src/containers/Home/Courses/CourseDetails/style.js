@@ -23,7 +23,8 @@ const style = StyleSheet.create({
     // alignItems: "center"
   },
   courseDetails: {
-    padding: 10,
+    height: "100%",
+    // padding: 10,
     flexDirection: "column",
     backgroundColor: "#fff"
   },
@@ -36,6 +37,8 @@ const style = StyleSheet.create({
     fontSize: 18
   },
   flatList: {
+    width: "100%",
+    flex: 1,
     padding: 10,
     backgroundColor: "#f5f5f0"
   },
