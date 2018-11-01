@@ -1,12 +1,14 @@
 import React, { Component } from "react";
 import { View, Text, Image, ScrollView } from "react-native";
 import { connect } from "react-redux";
-import { Button, Item, Input, Textarea } from "native-base";
+import { DatePicker, Item, Input, Textarea } from "native-base";
 import { Images, Colors } from "../../../config";
 import NavigationService from "../../../navigation/NavigationService";
 import style from "./style";
 import { height } from "../Profile/style";
 import SaveButton from "./SaveButton";
+import moment from "moment";
+
 const mapStateToProps = state => {
   return {};
 };
@@ -26,14 +28,16 @@ class NewCourse extends Component {
       name: "",
       short: "",
       details: "",
-      start_time: "",
-      end_time: "",
+      start_date: undefined,
+      end_date: undefined,
       cost: 0
     };
     this.changeCourseName = this.changeCourseName.bind(this);
     this.changeShortInfo = this.changeShortInfo.bind(this);
     this.changeDetailInfo = this.changeDetailInfo.bind(this);
     this.changeCost = this.changeCost.bind(this);
+    this.setStartData = this.setStartData.bind(this);
+    this.setEndData = this.setEndData.bind(this);
   }
 
   changeCourseName(value) {
@@ -48,8 +52,12 @@ class NewCourse extends Component {
   changeCost(value) {
     this.setState({ cost: value });
   }
-  changeEndTime() {}
-  changeStartTime() {}
+  setStartData(date) {
+    this.setState({ start_date: date }, this.forceUpdate());
+  }
+  setEndData(date) {
+    this.setState({ end_date: date });
+  }
   /**
    * "name": "course two",
 	"cost": 1200000,
@@ -61,6 +69,18 @@ class NewCourse extends Component {
    */
 
   render() {
+    let { start_date } = this.state;
+    let endOfStartDate = moment(new Date()).add(1, "year");
+    endOfStartDate = endOfStartDate.toDate();
+    let endOfEndData = new Date();
+    let startOfEndDate = new Date();
+    if (start_date) {
+      startOfEndDate = moment(start_date).add(1, "day");
+      startOfEndDate = startOfEndDate.toDate();
+      endOfEndData = moment(start_date).add(1, "year");
+      endOfEndData = endOfEndData.toDate();
+    }
+
     return (
       <ScrollView contentContainerStyle={style.mainContainer}>
         <View style={style.imageContainer}>
@@ -100,6 +120,38 @@ class NewCourse extends Component {
               style={style.textInput}
             />
           </Item>
+          <View style={{ flexDirection: "row", justifyContent: "center" }}>
+            <DatePicker
+              defaultDate={new Date()}
+              minimumDate={new Date()}
+              maximumDate={endOfStartDate}
+              locale={"en"}
+              timeZoneOffsetInMinutes={undefined}
+              modalTransparent={false}
+              animationType={"fade"}
+              androidMode={"default"}
+              placeHolderText="Select Start Date"
+              textStyle={{ color: "green" }}
+              placeHolderTextStyle={{ color: "#d3d3d3" }}
+              onDateChange={this.setStartData}
+            />
+
+            <DatePicker
+              defaultDate={startOfEndDate}
+              minimumDate={startOfEndDate}
+              maximumDate={endOfEndData}
+              locale={"en"}
+              timeZoneOffsetInMinutes={undefined}
+              modalTransparent={false}
+              animationType={"fade"}
+              androidMode={"default"}
+              placeHolderText="Select End Date"
+              textStyle={{ color: "green" }}
+              placeHolderTextStyle={{ color: "#d3d3d3" }}
+              onDateChange={this.setEndData}
+            />
+          </View>
+
           <Textarea
             rowSpan={6}
             bordered
@@ -116,22 +168,6 @@ class NewCourse extends Component {
         </View>
       </ScrollView>
     );
-    return {
-      /*<View>
-        <View style={style.imageContainer}>
-           <Image style={style.classImage} source={Images.courses.class} /> 
-          <View
-            style={{
-              width: "100%",
-              backgroundColor: "tomato",
-              flexDirection: "column"
-            }}
-          >
-          </View>
-        </View>
-      </View>
-      */
-    };
   }
 }
 

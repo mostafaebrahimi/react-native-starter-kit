@@ -54,6 +54,7 @@ const style = StyleSheet.create({
     justifyContent: "center"
   },
   mainContainer: {
+    paddingBottom: 20,
     flexGrow: 1,
     backgroundColor: "#fff"
   }
