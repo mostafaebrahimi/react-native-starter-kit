@@ -98,6 +98,13 @@ const style = StyleSheet.create({
   courseTitle: {
     fontSize: 18,
     fontWeight: "300"
+  },
+  addNewCourseButton: {
+    backgroundColor: Colors.borderColor,
+    borderRadius: 8,
+    padding: 10,
+    color: "#fff",
+    marginRight: 10
   }
 });
 

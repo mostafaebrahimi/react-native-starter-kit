@@ -10,7 +10,7 @@ import Courses from "./Courses";
 import Profile from "./Profile";
 import Header from "../Layouts/Header";
 import NavigationService from "../../navigation/NavigationService";
-
+import AddNewCourseButton from "./Profile/AddNewCourseButton";
 const bottomNavigation = createBottomTabNavigator(
   {
     Courses: {
@@ -57,13 +57,14 @@ bottomNavigation.navigationOptions = ({ navigation }) => {
   //uncomment to change
 
   // let title = routeName === "Profile" ? "Profile" : "Explore";
-
+  headerRight = (routeName == "Profile" ? <AddNewCourseButton /> : null);
   return {
     // title,
     // header: null
     // headerLeft: <Text>Left</Text>,
-    headerTitle: <Header />
-    // headerRight: <Text>Right</Text>
+    headerTitle: <Header />,
+    headerRight
+    // headerRight: <AddNewCourseButton />
   };
 };
 export default bottomNavigation;

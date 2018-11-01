@@ -2,6 +2,7 @@ import { createActions, handleActions } from "redux-actions";
 const initialState = {
   user: undefined,
   courses_list: [],
+  isTeacher: true,
   courses: {
     isFetching: false,
     error: undefined,

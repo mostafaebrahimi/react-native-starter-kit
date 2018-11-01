@@ -5,6 +5,7 @@ import ProfileImage from "./ProfileImage";
 import { TabView, TabBar, SceneMap } from "react-native-tab-view";
 import { MyCourses, Second } from "./Tabs";
 import { connect } from "react-redux";
+import AddNewCourseButton from "./AddNewCourseButton";
 const mapStateToProps = state => {
   return {};
 };
