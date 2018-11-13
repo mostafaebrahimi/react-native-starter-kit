@@ -10,7 +10,7 @@ import {
 import Home from "../containers/Home";
 import Course from "../containers/Home/Courses/CourseDetails";
 import NewCourse from "../containers/Home/NewCourse";
-
+import SingleLesson from "../containers/Home/Courses/CourseDetails/SingleLesson";
 const RootNavigator = createStackNavigator(
   {
     Login: LoginScreen,
@@ -18,7 +18,8 @@ const RootNavigator = createStackNavigator(
     RegisterTeacher: TeacherComponent,
     Home,
     Course,
-    NewCourse
+    NewCourse,
+    SingleLesson
   },
   {
     headerMode: "screen",

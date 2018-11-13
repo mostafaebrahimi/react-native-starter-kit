@@ -18,7 +18,7 @@ const Register = props => {
     return <View />;
   } else {
     return (
-      <TouchableWithoutFeedback>
+      <TouchableWithoutFeedback onPress={props.onPress}>
         <View>
           <Text style={style.registerButton}>Register</Text>
         </View>

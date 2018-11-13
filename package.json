@@ -16,6 +16,7 @@
     "react": "16.5.0",
     "react-native": "0.57.1",
     "react-native-cardview": "^2.0.2",
+    "react-native-dialog": "^5.4.0",
     "react-native-image-placeholder": "^1.0.14",
     "react-native-loading-spinner-overlay": "^1.0.1",
     "react-native-navigation": "^2.0.2581",
