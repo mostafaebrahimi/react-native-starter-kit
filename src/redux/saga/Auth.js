@@ -17,13 +17,17 @@ function* loginWorker(action) {
       key: "token",
       data: { token: res.token }
     });
+    storage.save({
+      key: "user",
+      data: { user: res.user }
+    });
     yield put(AuthActionsGenerator.auth.login.response(res));
   } catch (e) {
     yield put(AuthActionsGenerator.auth.login.error(e));
   }
 }
 
-export function* loginWatcher(action) {
+export function* loginWatcher() {
   // console.error("this is sample demo");
   yield takeEvery(AuthActionsGenerator.auth.login.call, loginWorker);
 }

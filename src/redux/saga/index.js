@@ -5,7 +5,14 @@ import {
   loginWatcher
 } from "./Auth";
 
+import { getCoursesWatcher } from "./Courses";
+
 export default function* rootWatcher() {
   console.log("root watcher");
-  yield all([registerStudentWatcher(), registerTeacherWatcher(), loginWatcher()]);
+  yield all([
+    registerStudentWatcher(),
+    registerTeacherWatcher(),
+    loginWatcher(),
+    getCoursesWatcher()
+  ]);
 }

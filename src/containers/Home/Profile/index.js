@@ -7,7 +7,9 @@ import { MyCourses, Second } from "./Tabs";
 import { connect } from "react-redux";
 import AddNewCourseButton from "./AddNewCourseButton";
 const mapStateToProps = state => {
-  return {};
+  return {
+    user: state.auth.user
+  };
 };
 const mapDispatchToProps = dispatch => {
   return {};
@@ -44,9 +46,11 @@ class ProfileComponent extends Component {
       <View style={style.mainContainer}>
         <View style={style.topHalf}>
           <ProfileImage />
-          <Text style={style.profileName}>Mostafa Ebrahimi</Text>
+          <Text style={style.profileName}>{`${this.props.user.first_name} ${
+            this.props.user.last_name
+          }`}</Text>
           <Text style={style.subTitle}>
-            {this.props.isTeacher ? "Teacher" : "Student"}
+            {this.props.user.role === "student" ? "Student" : "Teacher"}
           </Text>
         </View>
         <TabView

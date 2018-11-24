@@ -11,8 +11,11 @@ import Home from "../containers/Home";
 import Course from "../containers/Home/Courses/CourseDetails";
 import NewCourse from "../containers/Home/NewCourse";
 import SingleLesson from "../containers/Home/Courses/CourseDetails/SingleLesson";
+import Splash from "../containers/Splash";
+
 const RootNavigator = createStackNavigator(
   {
+    Splash,
     Login: LoginScreen,
     RegisterStudent: StudentComponent,
     RegisterTeacher: TeacherComponent,
@@ -23,7 +26,7 @@ const RootNavigator = createStackNavigator(
   },
   {
     headerMode: "screen",
-    initialRouteName: "Login"
+    initialRouteName: "Splash"
   }
 );
 

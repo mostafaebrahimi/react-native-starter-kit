@@ -6,6 +6,7 @@ import _ from "lodash";
 import InformationRow from "../Profile/Tabs/InformationRow";
 import images from "../../../config/images";
 import ImageInfoRow from "./ImgeInfoRow";
+import { rootPath } from "../../../redux/api/Config";
 class CourseRow extends Component {
   constructor(props) {
     super(props);
@@ -19,6 +20,13 @@ class CourseRow extends Component {
       ? text
       : text.substring(0, 20) + "...";
   }
+  _getFirstTeacher(teachers) {
+    if (!_.isUndefined(teachers) && teachers.length > 0) {
+      let teacher = teachers[0];
+      let fName = (teacher.first_name = teacher.last_name);
+      return this._showMoreText(fName);
+    } else return "No Teacher";
+  }
 
   render() {
     return (
@@ -28,9 +36,10 @@ class CourseRow extends Component {
             style={[style.courseImageStyle]}
             loadingStyle={{ size: "large", color: "blue" }}
             source={{
-              uri: this.props.img
-                ? this.props.img
-                : "https://iso.500px.com/wp-content/uploads/2016/04/stock-photo-150595123.jpg"
+              uri:
+                this.props.image
+                  ? rootPath + "/" + this.props.image
+                  : "https://iso.500px.com/wp-content/uploads/2016/04/stock-photo-150595123.jpg"
             }}
           />
           <View style={style.bodyContainer}>
@@ -39,7 +48,7 @@ class CourseRow extends Component {
             </Text>
             <ImageInfoRow
               img={images.courses.teacher}
-              info={this._showMoreText(this.props.teacher)}
+              info={this._getFirstTeacher(this.props.teacher)}
             />
             <ImageInfoRow
               img={images.courses.data}

@@ -9,10 +9,9 @@ import data from "./fake";
 import Dialog from "react-native-dialog";
 import RegisterButton from "./RegisterButton";
 
-
 const mapStateToProps = state => {
   return {
-    
+    course: state.course.selectedCourse
   };
 };
 
@@ -22,7 +21,9 @@ const mapDispatchToProps = dispatch => {
 
 class CourseDetails extends Component {
   static navigationOptions = ({ navigation }) => ({
-    title: `${navigation.state.params.title || "Course Name"}`,
+    title: `${navigation.state.params.title ||
+      navigation.state.params.courseName ||
+      "Course Name"}`,
     headerRight: !_.isUndefined(navigation.state.params.showAlert) ? (
       <RegisterButton onPress={navigation.getParam("showAlert")} />
     ) : (
@@ -38,7 +39,11 @@ class CourseDetails extends Component {
   };
 
   componentDidMount() {
-    this.props.navigation.setParams({ showAlert: this.showAlert });
+    this.props.navigation.setParams({
+      showAlert: this.showAlert,
+      course: this.props.course,
+      courseName: this.props.course.name
+    });
   }
 
   constructor(props) {
@@ -90,13 +95,9 @@ class CourseDetails extends Component {
             <CardItem>
               <Body>
                 <Text>
-                  Lorem Ipsum is simply dummy text of the printing and
-                  typesetting industry. Lorem Ipsum has been the industry's
-                  standard dummy text ever since the 1500s, when an unknown
-                  printer took a galley of type and scrambled it to make a type
-                  specimen book. It has survived not only five centuries, but
-                  also the leap into electronic typesetting, remaining
-                  essentially unchanged. It was pop
+                  {this.props.course
+                    ? this.props.course.detailed_information
+                    : "No information here"}
                 </Text>
               </Body>
             </CardItem>

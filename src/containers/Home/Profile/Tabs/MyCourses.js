@@ -6,16 +6,20 @@ import { connect } from "react-redux";
 import _ from "lodash";
 import EmptyView from "./EmptyView";
 import SingleCourse from "./SingleCourse";
+import { AuthActionsGenerator } from "../../../../redux/reducers/Auth";
 import NavigationService from "../../../../navigation/NavigationService";
 
 const mapStateToProps = state => {
   return {
-    courses: state.profile.courses.response
+    user: state.auth.user
   };
 };
 
 const mapDispatchToProps = dispatch => {
-  return {};
+  return {
+    selectCourse: payload =>
+      dispatch(AuthActionsGenerator.auth.selectccourse(payload))
+  };
 };
 
 class MyCourses extends Component {
@@ -25,29 +29,33 @@ class MyCourses extends Component {
     this._changeToDetailsRoute = this._changeToDetailsRoute.bind(this);
   }
 
-  _changeToDetailsRoute() {
+  _changeToDetailsRoute(item) {
+    this.props.selectCourse(item);
     NavigationService.navigateTopStack("Course");
   }
+
   render() {
-    let { courses } = this.props;
-    // if (!_.isUndefined(courses) && courses.length > 0) {
+    let { courses } = this.props.user;
+    if (!_.isUndefined(courses) && courses.length > 0) {
+      return (
+        <View style={style.tabsScreen}>
+          <FlatList
+            data={courses}
+            renderItem={({ item }) => (
+              <CourseRow
+                teacher={item.teacher || "Not Teacher Yet"}
+                courseName={item.name}
+                startDate={item.start_date}
+                onPress={this._changeToDetailsRoute(item)}
+              />
+            )}
+          />
+        </View>
+      );
+    }
     return (
       <View style={style.tabsScreen}>
-        <TouchableWithoutFeedback onPress={this._changeToDetailsRoute}>
-          <View>
-            <SingleCourse
-              courseName={"More than vver course"}
-              teacher={"Ali Ebrahimi"}
-              startDate={"10/9/2018"}
-            />
-          </View>
-        </TouchableWithoutFeedback>
-      </View>
-    );
-    // }
-    return (
-      <View style={style.tabsScreen}>
-        <EmptyView msg={"not registered in any courses"} />
+        <EmptyView msg={"no items here"} />
       </View>
     );
   }

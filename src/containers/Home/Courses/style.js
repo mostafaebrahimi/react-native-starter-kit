@@ -5,6 +5,11 @@ const width = Dimensions.get("window").width;
 const height = Dimensions.get("window").height;
 
 const style = StyleSheet.create({
+  tabsScreen: {
+    flex: 1,
+    color: "#000",
+    backgroundColor: "#fff"
+  },
   courseViewContainer: {
     height: 150,
     flexDirection: "row",

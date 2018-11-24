@@ -4,6 +4,9 @@ const initialState = {
   password: undefined,
   isFetching: false,
   counter: 0,
+  selectedCourse: undefined,
+  user: undefined,
+  token: undefined,
   registerStudent: {
     isFetching: false,
     error: undefined,
@@ -23,6 +26,8 @@ const initialState = {
 
 export const AuthActionsGenerator = createActions({
   AUTH: {
+    selectCourse: payload => payload,
+    fillInfo: payload => payload,
     REGISTER: {
       STUDENT: {
         call: payload => ({ payload }),
@@ -66,6 +71,19 @@ export default (AuthActions = handleActions(
         }
       };
     },
+    [AuthActionsGenerator.auth.fillInfo](state, action) {
+      return {
+        ...state,
+        user: action.payload.user,
+        token: action.payload.token
+      };
+    },
+    [AuthActionsGenerator.auth.selectCourse](state, action) {
+      return {
+        ...state,
+        selectedCourse: action.payload.course
+      };
+    },
     [AuthActionsGenerator.auth.login.error](state, action) {
       return {
         ...state,
@@ -101,7 +119,7 @@ export default (AuthActions = handleActions(
         registerStudent: {
           isFetching: false,
           error: null,
-          response: action.response
+          response: action.payload
         }
       };
     },
@@ -110,7 +128,7 @@ export default (AuthActions = handleActions(
         ...state,
         registerStudent: {
           isFetching: false,
-          error: action.error,
+          error: action.payload,
           response: null
         }
       };
@@ -130,7 +148,7 @@ export default (AuthActions = handleActions(
         registerTeacher: {
           isFetching: false,
           error: null,
-          response: action.response
+          response: action.payload
         }
       };
     },
@@ -139,7 +157,7 @@ export default (AuthActions = handleActions(
         ...state,
         registerTeacher: {
           isFetching: false,
-          error: action.error,
+          error: action.payload,
           response: null
         }
       };

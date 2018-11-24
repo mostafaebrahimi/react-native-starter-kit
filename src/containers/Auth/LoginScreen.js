@@ -5,15 +5,17 @@ import {
   Image,
   Dimensions,
   TouchableOpacity,
-  ActivityIndicator
+  ActivityIndicator,
+  AsyncStorage
 } from "react-native";
 import BackgroundImage from "../../components/BackgroundImage";
-import { Toast } from "antd-mobile-rn";
+
 import { Colors, Images, Strings } from "../../config";
 import style from "./Style";
 import { Button, Item, Input, Title, Subtitle } from "native-base";
 import { connect } from "react-redux";
 import { AuthActionsGenerator } from "../../redux/reducers/Auth";
+import Toast, { DURATION } from "react-native-easy-toast";
 
 const mapStateToProps = state => {
   return {
@@ -49,6 +51,7 @@ class LoginScreen extends Component {
     this.navigateToRegisterStudent = this.navigateToRegisterStudent.bind(this);
     this.navigateToRegisterTeacher = this.navigateToRegisterTeacher.bind(this);
     this.submitForm = this.submitForm.bind(this);
+    this.validateForm = this.validateForm.bind(this);
   }
 
   componentWillReceiveProps() {
@@ -71,36 +74,26 @@ class LoginScreen extends Component {
   }
 
   submitForm() {
-    /*
-    if (this.state.username.length <= 0) {
-      Toast.info("Please enter username");
-      return;
-    }
-    if (this.state.password.length <= 0) {
-      Toast.info("Please enter password");
-      return;
-    }
-    */
+    if (!this.validateForm()) return;
     let login = {
       username: this.state.username,
       password: this.state.password
     };
-
-    // this.props.login(login);
-    this.props.navigation.replace("Home");
-    // this.props.action();
-
-    /*
-    let that = this;
-    Toast.info("this is toast");
-    console.log(this.state);
+    this.props.login(login);
     this.setState({ isLoading: true });
-    setTimeout(function() {
-      that.setState({ isLoading: false });
-      that.props.navigation.navigate("Register");
-    }, 5000);
-    */
   }
+
+  validateForm = () => {
+    if (this.state.username.length <= 0) {
+      this.refs.toast.show("Please enter username");
+      return false;
+    }
+    if (this.state.password.length <= 0) {
+      this.refs.toast.show("Please enter password");
+      return false;
+    }
+    return true;
+  };
 
   navigateToRegisterStudent() {
     this.props.navigation.navigate("RegisterStudent");
@@ -111,7 +104,13 @@ class LoginScreen extends Component {
   }
 
   render() {
-    let { isFetching } = this.props.auth.login;
+    let { error, response } = this.props.auth.login;
+    if (error) {
+      this.refs.toast.show(error.response.data.error);
+    } else if (response) {
+      this.props.navigation.replace("Home");
+      return <View />;
+    }
     return (
       <View style={{ flex: 1 }}>
         <BackgroundImage>
@@ -186,6 +185,7 @@ class LoginScreen extends Component {
             )}
           </View>
         </BackgroundImage>
+        <Toast ref="toast" />
       </View>
     );
   }

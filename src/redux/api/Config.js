@@ -1,14 +1,15 @@
-let rootPath = "http://167.99.111.154:8000/";
+export const rootPath = "http://172.16.137.192:8000";
 const Config = {
-  login: rootPath + "login",
+  login: rootPath + "/login",
   register: {
-    student: rootPath + "register/student",
-    teacher: rootPath + "register/teacher"
+    student: rootPath + "/register/student",
+    teacher: rootPath + "/register/teacher"
   },
-  students: rootPath + "students",
+  students: rootPath + "/students",
   profile: {
     courses_list: rootPath + "/courses"
-  }
+  },
+  courses:rootPath + "/courses",
 };
 
 export function getHeaderBasedOnToken(token) {

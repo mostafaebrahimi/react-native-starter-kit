@@ -3,6 +3,17 @@ import { View, Text, ScrollView } from "react-native";
 import style from "./style";
 import Card from "./Card";
 import InformationRow from "./InformationRow";
+import { connect } from "react-redux";
+const mapStateToProps = state => {
+  return {
+    user: state.auth.user
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {};
+};
+
 class Second extends Component {
   constructor(props) {
     super(props);
@@ -14,12 +25,12 @@ class Second extends Component {
       <ScrollView style={style.tabsScreen}>
         <Card title={"Account"}>
           <View>
-            <InformationRow title={"Username: "} info={"mostafaebra"} />
+            <InformationRow title={"Username: "} info={this.props.user.email} />
+            <InformationRow title={"Email: "} info={this.props.user.email} />
             <InformationRow
-              title={"Email: "}
-              info={"mostafaebrahimi.me@gmail.com"}
+              title={"Phone Number: "}
+              info={this.props.user.phone}
             />
-            <InformationRow title={"Phone Number: "} info={"09172195514"} />
           </View>
         </Card>
       </ScrollView>
@@ -27,4 +38,8 @@ class Second extends Component {
   }
 }
 
-export default Second;
+const SecondConnect = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Second);
+export default SecondConnect;
