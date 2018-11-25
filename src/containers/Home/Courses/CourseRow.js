@@ -54,8 +54,8 @@ class CourseRow extends Component {
               img={images.courses.data}
               info={this._showMoreText(this.props.startDate)}
             />
-            <ImageInfoRow img={images.courses.student} info={"20 people"} />
-            <ImageInfoRow img={images.courses.star} info={"5 points"} />
+            <ImageInfoRow img={images.courses.student} info={this.props.studentNumber} />
+            <ImageInfoRow img={images.courses.price} info={this.props.cost} />
           </View>
         </View>
       </TouchableWithoutFeedback>

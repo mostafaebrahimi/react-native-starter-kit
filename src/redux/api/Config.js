@@ -1,4 +1,8 @@
-export const rootPath = "http://172.16.137.192:8000";
+export const rootPath = "http://192.168.43.82:8000";
+import Storage from "react-native-storage";
+import { AsyncStorage } from "react-native";
+
+
 const Config = {
   login: rootPath + "/login",
   register: {
@@ -9,13 +13,21 @@ const Config = {
   profile: {
     courses_list: rootPath + "/courses"
   },
-  courses:rootPath + "/courses",
+  register: rootPath + "/student/get/course",
+  courses: rootPath + "/courses"
 };
 
 export function getHeaderBasedOnToken(token) {
-  return {
-    "": token
-  };
+  // try {
+  //   let token =  storage.load({
+  //     key: "loginState"
+  //   });
+  //   return {
+  //     Authorization: "Bearer " + token
+  //   };
+  // } catch (e) {
+  //   return undefined;
+  // }
 }
 
 export default Config;

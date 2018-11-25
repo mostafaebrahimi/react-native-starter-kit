@@ -22,6 +22,7 @@
     "react-native-loading-spinner-overlay": "^1.0.1",
     "react-native-navigation": "^2.0.2581",
     "react-native-paper": "^2.1.3",
+    "react-native-simple-dialogs": "^1.0.0",
     "react-native-storage": "^0.2.3",
     "react-native-svg": "^8.0.8",
     "react-native-svg-uri": "^1.2.3",

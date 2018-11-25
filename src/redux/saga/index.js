@@ -5,7 +5,7 @@ import {
   loginWatcher
 } from "./Auth";
 
-import { getCoursesWatcher } from "./Courses";
+import { getCoursesWatcher, registerCourseCallWatcher } from "./Courses";
 
 export default function* rootWatcher() {
   console.log("root watcher");
@@ -13,6 +13,7 @@ export default function* rootWatcher() {
     registerStudentWatcher(),
     registerTeacherWatcher(),
     loginWatcher(),
-    getCoursesWatcher()
+    getCoursesWatcher(),
+    registerCourseCallWatcher()
   ]);
 }

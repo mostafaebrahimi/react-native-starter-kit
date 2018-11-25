@@ -4,6 +4,11 @@ const initialState = {
   selectedCourse: undefined,
   selectedLesson: undefined,
   fetching: false,
+  register: {
+    fetching: false,
+    error: undefined,
+    res: undefined
+  },
   error: undefined
 };
 
@@ -13,7 +18,10 @@ export const CourseActionsGenerator = createActions({
     selectLesson: payload => payload,
     addcourses: payload => payload,
     isFetching: () => {},
-    errorFetchig: payload => payload
+    errorFetchig: payload => payload,
+    registerCall: payload => payload,
+    registerError: payload => payload,
+    registerResult: payload => payload
   }
 });
 
@@ -36,6 +44,24 @@ export default (CourseActions = handleActions(
     },
     [CourseActionsGenerator.course.errorfetchig](state, action) {
       return { ...state, isfetching: false, error: action.payload.error };
+    },
+    [CourseActionsGenerator.course.registerCall](state) {
+      return {
+        ...state,
+        register: { err: undefined, res: undefined, fetching: true }
+      };
+    },
+    [CourseActionsGenerator.course.registerResult](state, action) {
+      return {
+        ...state,
+        register: { err: undefined, res: action.res, fetching: false }
+      };
+    },
+    [CourseActionsGenerator.course.registerError](state, action) {
+      return {
+        ...state,
+        register: { err: action.err, res: undefined, fetching: false }
+      };
     }
   },
   initialState

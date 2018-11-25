@@ -17,5 +17,16 @@ export default (CoursesApi = {
       .catch(err => {
         throw err;
       });
+  },
+  registerOnCourse: function(course) {
+    let config = {
+      headers: { Authorization: "Bearer " + course.token }
+    };
+    return axios
+      .get(URLs.register + "/" + course._id, config)
+      .then(response => response.data)
+      .catch(err => {
+        throw err;
+      });
   }
 });

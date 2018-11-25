@@ -4,19 +4,30 @@ import style from "./style";
 import _ from "lodash";
 import { connect } from "react-redux";
 import Lesson from "./Lesson";
+import Course, {
+  CourseActionsGenerator
+} from "../../../../redux/reducers/Course";
 import { Card, CardItem, Text, Body } from "native-base";
 import data from "./fake";
 import Dialog from "react-native-dialog";
 import RegisterButton from "./RegisterButton";
+import { ProgressDialog, ConfirmDialog } from "react-native-simple-dialogs";
+import NavigationService from "../../../../navigation/NavigationService";
 
 const mapStateToProps = state => {
   return {
-    course: state.course.selectedCourse
+    course: state.course.selectedCourse,
+    register: state.course.register
   };
 };
 
 const mapDispatchToProps = dispatch => {
-  return {};
+  return {
+    selectLesson: item =>
+      dispatch(CourseActionsGenerator.course.selectLesson(item)),
+    registerCourse: course =>
+      dispatch(CourseActionsGenerator.course.registerCall(course))
+  };
 };
 
 class CourseDetails extends Component {
@@ -31,12 +42,27 @@ class CourseDetails extends Component {
     )
   });
 
+  constructor(props) {
+    super(props);
+    this.state = { showAlert: false };
+    this._showMoreText = this._showMoreText.bind(this);
+    this.showAlert = this.showAlert.bind(this);
+    this._registerOnCourse = this._registerOnCourse.bind(this);
+  }
+
   showAlert = () => {
     this.setState({
       showAlert: true
     });
+
     this.navigateToSingleLesson = this.navigateToSingleLesson.bind(this);
   };
+  _registerOnCourse() {
+    this.setState({
+      showAlert: false
+    });
+    this.props.registerCourse(this.props.course);
+  }
 
   componentDidMount() {
     this.props.navigation.setParams({
@@ -46,20 +72,10 @@ class CourseDetails extends Component {
     });
   }
 
-  constructor(props) {
-    super(props);
-    this.state = { showAlert: false };
-    this._showMoreText = this._showMoreText.bind(this);
-    this.showAlert = this.showAlert.bind(this);
-  }
-
   hideAlert = () => {
-    this.setState(
-      {
-        showAlert: false
-      },
-      () => this.props.navigation.goBack()
-    );
+    this.setState({
+      showAlert: false
+    });
   };
 
   _showMoreText(text) {
@@ -70,8 +86,9 @@ class CourseDetails extends Component {
   }
 
   navigateToSingleLesson(item) {
+    this.props.selectLesson(item);
     let { name } = item;
-    this.props.navigation.navigate("SingleLesson", name);
+    NavigationService.navigateTopStack("SingleLesson", { name });
   }
 
   render() {
@@ -79,14 +96,20 @@ class CourseDetails extends Component {
 
     return (
       <ScrollView style={style.courseDetails}>
-        <Dialog.Container visible={showAlert}>
-          <Dialog.Title>Register</Dialog.Title>
-          <Dialog.Description>
-            Are you sure to register in this course?
-          </Dialog.Description>
-          <Dialog.Button label="No, cancel" onPress={this.hideAlert} />
-          <Dialog.Button label="Yes, sure" onPress={this.hideAlert} />
-        </Dialog.Container>
+        <ConfirmDialog
+          title="Register"
+          message="Are you sure to register in this course?"
+          visible={showAlert}
+          onTouchOutside={this.hideAlert}
+          positiveButton={{
+            title: "YES",
+            onPress: this._registerOnCourse
+          }}
+          negativeButton={{
+            title: "NO",
+            onPress: this.hideAlert
+          }}
+        />
         <View style={{ padding: 10 }}>
           <Card>
             <CardItem header>
@@ -110,7 +133,7 @@ class CourseDetails extends Component {
               <Body style={{ flex: 1 }}>
                 <FlatList
                   style={style.flatList}
-                  data={data}
+                  data={this.props.course.lessons || []}
                   renderItem={({ item }) => (
                     <Lesson
                       name={item.name}
@@ -123,6 +146,11 @@ class CourseDetails extends Component {
             </CardItem>
           </Card>
         </View>
+        <ProgressDialog
+          visible={this.props.register.fetching}
+          title="Progress Dialog"
+          message="Please, wait..."
+        />
       </ScrollView>
     );
   }

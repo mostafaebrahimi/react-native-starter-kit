@@ -54,6 +54,8 @@ class Courses extends Component {
                 image={item.image}
                 teacher={item.teacher}
                 courseName={item.name}
+                studentNumber={item.students.length || 0}
+                cost={item.cost}
                 startDate={new Date(item.start_time).toString()}
                 onPress={this._onCardPress(item)}
               />

@@ -12,6 +12,7 @@ const images = {
     data: require("../../images/date.png"),
     student: require("../../images/cap.png"),
     star: require("../../images/star.png"),
+    price: require("../../images/price.png"),
     class:require("../../images/class.png")
   }
 };
