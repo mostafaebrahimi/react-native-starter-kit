@@ -4,9 +4,16 @@ const initialState = {
   password: undefined,
   isFetching: false,
   counter: 0,
+  courses: [],
+  isTeacher: false,
   selectedCourse: undefined,
   user: undefined,
   token: undefined,
+  getUser: {
+    fetching: false,
+    err: undefined,
+    response: undefined
+  },
   registerStudent: {
     isFetching: false,
     error: undefined,
@@ -28,16 +35,25 @@ export const AuthActionsGenerator = createActions({
   AUTH: {
     selectCourse: payload => payload,
     fillInfo: payload => payload,
+    isTeacher: () => {},
+    isNotTeacher: () => {},
+    USER: {
+      error: payload => payload,
+      fetching: payload => payload,
+      response: payload => payload
+    },
     REGISTER: {
       STUDENT: {
-        call: payload => ({ payload }),
+        call: payload => payload,
         isfetching: () => {},
-        response: payload => ({ payload })
+        error: payload => payload,
+        response: payload => payload
       },
       TEACHER: {
-        call: payload => ({ payload }),
+        call: payload => payload,
         isfetching: () => {},
-        response: payload => ({ payload })
+        error: payload => payload,
+        response: payload => payload
       }
     },
     LOGIN: {
@@ -57,6 +73,12 @@ export default (AuthActions = handleActions(
   {
     [AuthActionsGenerator.auth.counter.inc](state) {
       return { ...state, counter: state.counter + 1 };
+    },
+    [AuthActionsGenerator.auth.isTeacher](state) {
+      return { ...state, isTeacher: true };
+    },
+    [AuthActionsGenerator.auth.isNotTeacher](state) {
+      return { ...state, isTeacher: false };
     },
     [AuthActionsGenerator.auth.counter.dec](state) {
       return { ...state, counter: state.counter - 1 };
@@ -104,12 +126,46 @@ export default (AuthActions = handleActions(
         }
       };
     },
+    [AuthActionsGenerator.auth.user.fetching](state) {
+      return {
+        ...state,
+        getUser: {
+          fetching: true,
+          response: undefined,
+          error: undefined
+        }
+      };
+    },
+    [AuthActionsGenerator.auth.user.response](state, action) {
+      return {
+        ...state,
+        user: action.payload,
+        courses: action.payload.courses,
+        getUser: {
+          fetching: false,
+          response: action.payload,
+          error: undefined
+        }
+      };
+    },
+    [AuthActionsGenerator.auth.user.error](state, action) {
+      return {
+        ...state,
+        getUser: {
+          fetching: false,
+          response: undefined,
+          error: action.payload
+        }
+      };
+    },
     [AuthActionsGenerator.auth.register.student.isfetching](state) {
       return {
         ...state,
         registerStudent: {
           ...state.registerStudent,
-          isFetching: true
+          isFetching: true,
+          response: undefined,
+          error: undefined
         }
       };
     },
@@ -118,7 +174,7 @@ export default (AuthActions = handleActions(
         ...state,
         registerStudent: {
           isFetching: false,
-          error: null,
+          error: undefined,
           response: action.payload
         }
       };
@@ -129,7 +185,7 @@ export default (AuthActions = handleActions(
         registerStudent: {
           isFetching: false,
           error: action.payload,
-          response: null
+          response: undefined
         }
       };
     },
@@ -138,7 +194,9 @@ export default (AuthActions = handleActions(
         ...state,
         registerTeacher: {
           ...state.registerStudent,
-          isFetching: true
+          isFetching: true,
+          response: undefined,
+          error: undefined
         }
       };
     },
@@ -147,7 +205,7 @@ export default (AuthActions = handleActions(
         ...state,
         registerTeacher: {
           isFetching: false,
-          error: null,
+          error: undefined,
           response: action.payload
         }
       };
@@ -158,7 +216,7 @@ export default (AuthActions = handleActions(
         registerTeacher: {
           isFetching: false,
           error: action.payload,
-          response: null
+          response: undefined
         }
       };
     }

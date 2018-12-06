@@ -96,24 +96,33 @@ class LoginScreen extends Component {
   };
 
   navigateToRegisterStudent() {
-    this.props.navigation.navigate("RegisterStudent");
+    this.props.navigation.replace("RegisterStudent");
   }
 
   navigateToRegisterTeacher() {
-    this.props.navigation.navigate("RegisterTeacher");
+    this.props.navigation.replace("RegisterTeacher");
   }
 
   render() {
     let { error, response } = this.props.auth.login;
     if (error) {
-      this.refs.toast.show(error.response.data.error);
+      this.refs.toast.show(error.response.data.error, 500);
     } else if (response) {
       this.props.navigation.replace("Home");
       return <View />;
     }
     return (
       <View style={{ flex: 1 }}>
-        <BackgroundImage>
+        <View
+          style={{
+            backgroundColor: "#fff",
+            flex: 1,
+            height: "100%",
+            width: "100%",
+            justifyContent: "center",
+            alignItems: "center"
+          }}
+        >
           <View style={[style.darkBoxWithOpacity]}>
             <View style={style.logoContainer}>
               <Image source={Images.splash.logo} style={style.logo} />
@@ -158,17 +167,17 @@ class LoginScreen extends Component {
               </TouchableOpacity>
             </View>
             <View style={style.registerLink}>
-              <Text style={{ color: "#fff" }}>Don't have account?</Text>
+              <Text style={{ color: "#000" }}>Don't have account?</Text>
               <View style={{ flexDirection: "row" }}>
                 <Text
                   onPress={this.navigateToRegisterStudent}
-                  style={[style.link, { marginRight: 5 }]}
+                  style={[style.link, { padding: 10 }]}
                 >
                   Student
                 </Text>
                 <Text
                   onPress={this.navigateToRegisterTeacher}
-                  style={style.link}
+                  style={[style.link, { padding: 10 }]}
                 >
                   Teacher
                 </Text>
@@ -184,7 +193,7 @@ class LoginScreen extends Component {
               <View />
             )}
           </View>
-        </BackgroundImage>
+        </View>
         <Toast ref="toast" />
       </View>
     );

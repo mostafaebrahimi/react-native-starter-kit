@@ -6,7 +6,7 @@ import NavigationService from "../../../navigation/NavigationService";
 
 const mapStateToProps = state => {
   return {
-    isTeacher: state.profile.isTeacher
+    isTeacher: state.auth.isTeacher
   };
 };
 
@@ -15,6 +15,7 @@ const mapDispatchToProps = dispatch => {
 };
 
 class AddNewCourseButton extends Component {
+
   constructor(props) {
     super(props);
     this.state = {};

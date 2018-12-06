@@ -8,12 +8,12 @@ import {
   ActivityIndicator
 } from "react-native";
 import BackgroundImage from "../../../components/BackgroundImage";
-import { Toast } from "antd-mobile-rn";
 import { Colors, Images, Strings } from "../../../config";
 import style from "../Style";
 import { Button, Item, Input, Title, Subtitle } from "native-base";
 import { connect } from "react-redux";
 import { AuthActionsGenerator } from "../../../redux/reducers/Auth";
+import Toast, { DURATION } from "react-native-easy-toast";
 
 const mapStateToProps = state => {
   return {
@@ -24,7 +24,9 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     register: payload =>
-      dispatch(AuthActionsGenerator.auth.register.teacher.call(payload))
+      dispatch(AuthActionsGenerator.auth.register.teacher.call(payload)),
+    reinit: paylaod =>
+      dispatch(AuthActionsGenerator.auth.register.teacher.response(paylaod))
   };
 };
 
@@ -35,12 +37,17 @@ class TeacherComponent extends Component {
 
   constructor(props) {
     super(props);
+    this.props.reinit(undefined);
     this.state = {
-      first_name: "",
-      last_name: "",
-      email: "",
-      phone: "",
-      password: ""
+      user: {
+        first_name: "",
+        last_name: "",
+        email: "",
+        phone: "",
+        password: ""
+      },
+      opacity: false,
+      isLoading: false
     };
     this.changeFirstName = this.changeFirstName.bind(this);
     this.changeLastName = this.changeLastName.bind(this);
@@ -56,35 +63,31 @@ class TeacherComponent extends Component {
   }
 
   changeFirstName(value) {
-    this.setState({ first_name: value });
+    this.setState({ user: { ...this.state.user, first_name: value } });
   }
 
   changeLastName(value) {
-    this.setState({ last_name: value });
+    this.setState({ user: { ...this.state.user, last_name: value } });
   }
 
   changeEmail(value) {
-    this.setState({ email: value });
+    this.setState({ user: { ...this.state.user, email: value } });
   }
 
   changePassword(value) {
-    this.setState({ password: value });
+    this.setState({ user: { ...this.state.user, password: value } });
   }
 
   changePhone(value) {
-    this.setState({ phone: value });
-  }
-
-  componentDidMount() {
-    //
+    this.setState({ user: { ...this.state.user, phone: value } });
   }
 
   changeToLogin() {
-    this.props.navigation.navigate("Login");
+    this.props.navigation.replace("Login");
   }
 
   submitForm() {
-    let { first_name, last_name, email, phone, password } = this.state;
+    let { first_name, last_name, email, phone, password } = this.state.user;
     if (
       first_name.length <= 0 ||
       last_name.length <= 0 ||
@@ -95,7 +98,7 @@ class TeacherComponent extends Component {
       Toast.info("Please fill the form");
       return;
     }
-    let teacher = { ...this.state };
+    let teacher = { ...this.state.user };
     this.props.register(teacher);
     // this.props.action();
 
@@ -112,14 +115,21 @@ class TeacherComponent extends Component {
   }
 
   navigateToLogin() {
-    this.props.navigation.navigate("Login");
+    this.props.navigation.replace("Login");
   }
 
   render() {
-    let { isFetching } = this.props.auth.registerTeacher;
+    let { error, response } = this.props.auth.registerTeacher;
+    if (error) {
+      this.refs.toast.show(error.message || error.response.data.error, 2000);
+    } else if (response) {
+      this.props.navigation.replace("Home");
+      return <View />;
+    }
     return (
       <View style={{ flex: 1 }}>
         <BackgroundImage>
+        <Toast ref="toast" />
           <View style={[style.darkBoxWithOpacity]}>
             <View style={{ flex: 0.1 }}>
               <Text style={style.AppName}>
@@ -132,7 +142,7 @@ class TeacherComponent extends Component {
                   onChangeText={this.changeFirstName}
                   placeholderTextColor={Colors.placeHolderColor}
                   placeholder={Strings.register.firstname}
-                  value={this.state.first_name || ""}
+                  value={this.state.user.first_name || ""}
                   style={style.textInput}
                 />
               </Item>
@@ -141,7 +151,7 @@ class TeacherComponent extends Component {
                   onChangeText={this.changeLastName}
                   placeholderTextColor={Colors.placeHolderColor}
                   placeholder={Strings.register.lastname}
-                  value={this.state.last_name || ""}
+                  value={this.state.user.last_name || ""}
                   style={style.textInput}
                 />
               </Item>
@@ -150,7 +160,7 @@ class TeacherComponent extends Component {
                   onChangeText={this.changeEmail}
                   placeholderTextColor={Colors.placeHolderColor}
                   placeholder={Strings.register.email}
-                  value={this.state.email || ""}
+                  value={this.state.user.email || ""}
                   style={style.textInput}
                 />
               </Item>
@@ -159,7 +169,7 @@ class TeacherComponent extends Component {
                   onChangeText={this.changePhone}
                   placeholderTextColor={Colors.placeHolderColor}
                   placeholder={Strings.register.phone}
-                  value={this.state.phone || ""}
+                  value={this.state.user.phone || ""}
                   style={style.textInput}
                 />
               </Item>
@@ -168,7 +178,7 @@ class TeacherComponent extends Component {
                   onChangeText={this.changePassword}
                   placeholderTextColor={Colors.placeHolderColor}
                   placeholder={Strings.register.password}
-                  value={this.state.password || ""}
+                  value={this.state.user.password || ""}
                   style={style.textInput}
                 />
               </Item>
@@ -177,10 +187,7 @@ class TeacherComponent extends Component {
                 loading={this.state.isLoading}
                 onPress={this.submitForm}
               >
-                <Text
-                  onPress={this.changeToLogin}
-                  style={style.submitButtonText}
-                >
+                <Text onPress={this.submitForm} style={style.submitButtonText}>
                   {Strings.register.submit}
                 </Text>
               </TouchableOpacity>
@@ -190,15 +197,24 @@ class TeacherComponent extends Component {
                 {Strings.register.to_login}
               </Text>
             </View>
-            {isFetching ? (
+            <View
+              style={{
+                marginTop: 10,
+                flex: 0.1
+              }}
+            >
               <ActivityIndicator
-                size="large"
                 animating={true}
-                color={Colors.indicator}
+                color="#000"
+                style={{
+                  opacity: this.props.auth.registerStudent.isFetching
+                    ? 1.0
+                    : 0.0,
+                  height: 50
+                }}
+                size="large"
               />
-            ) : (
-              <View />
-            )}
+            </View>
           </View>
         </BackgroundImage>
       </View>

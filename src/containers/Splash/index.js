@@ -1,13 +1,11 @@
 import React, { Component } from "react";
 import { View, Text, Image, ActivityIndicator } from "react-native";
-
 import style from "./style";
-
 import { connect } from "react-redux";
 import { AuthActionsGenerator } from "../../redux/reducers/Auth";
 import Toast, { DURATION } from "react-native-easy-toast";
 import { Images, Strings, Colors } from "../../config";
-
+import _ from "lodash";
 import Storage from "react-native-storage";
 import { AsyncStorage } from "react-native";
 
@@ -17,12 +15,18 @@ var storage = new Storage({
 });
 
 const mapStateToProps = state => {
-  return {};
+  return {
+    getuser: state.auth.getUser
+  };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    fillInfo: payload => dispatch(AuthActionsGenerator.auth.fillInfo(payload))
+    fillInfo: payload => dispatch(AuthActionsGenerator.auth.fillInfo(payload)),
+    isTeacher: () => dispatch(AuthActionsGenerator.auth.isTeacher()),
+    isNotTeacher: () => dispatch(AuthActionsGenerator.auth.isNotTeacher()),
+    requestForUser: payload =>
+      dispatch(AuthActionsGenerator.auth.user.fetching(payload))
   };
 };
 
@@ -40,6 +44,8 @@ class Splash extends Component {
     this._isUserExist();
   }
 
+  props;
+
   _isUserExist = async () => {
     let that = this;
     let token = await storage
@@ -53,23 +59,38 @@ class Splash extends Component {
     if (token && user) {
       user.token = token;
       this.props.fillInfo(user);
-      setTimeout(() => {
-        that.props.navigation.replace("Home");
-      }, 3000);
+      if (user.user.role === "teacher") this.props.isTeacher();
+      else this.props.isNotTeacher();
+      this.props.requestForUser(token);
+      // setTimeout(() => {
+      //   that.props.navigation.replace("Login");
+      // }, 4000);
+      // setTimeout(() => {
+      //   that.props.navigation.replace("Home");
+      // }, 3000);
     } else {
       setTimeout(() => {
         that.props.navigation.replace("Login");
-      }, 3000);
+      }, 7000);
     }
   };
 
   render() {
+    if (
+      !this.props.getuser.fetching &&
+      !_.isUndefined(this.props.getuser.response) &&
+      _.isUndefined(this.props.getuser.error)
+    ) {
+      this.props.navigation.replace("Home");
+      // this.props.navigation.replace("Login");
+      return <View />;
+    }
     return (
       <View
         style={{
           flex: 1,
           flexDirection: "column",
-          backgroundColor: Colors.indicator,
+          backgroundColor: "#FFF",
           justifyContent: "space-between"
         }}
       >
@@ -89,7 +110,12 @@ class Splash extends Component {
             Moon Lesson
           </Text>
         </View>
-        <View style={{ alignContent: "flex-end", height: 100 }}>
+        <View
+          style={{
+            alignContent: "flex-end",
+            height: 100
+          }}
+        >
           <ActivityIndicator
             size="large"
             animating={true}

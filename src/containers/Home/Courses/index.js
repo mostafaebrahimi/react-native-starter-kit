@@ -38,7 +38,10 @@ class Courses extends Component {
     let that = this;
     return function() {
       that.props.selectCourse(item);
-      NavigationService.navigateTopStack("Course", { title: item.courseName });
+      NavigationService.navigateTopStack("Course", {
+        title: item.courseName,
+        showRegister: true
+      });
     };
   }
 

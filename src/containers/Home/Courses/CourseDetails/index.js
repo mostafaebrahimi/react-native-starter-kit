@@ -7,11 +7,13 @@ import Lesson from "./Lesson";
 import Course, {
   CourseActionsGenerator
 } from "../../../../redux/reducers/Course";
-import { Card, CardItem, Text, Body } from "native-base";
-import data from "./fake";
-import Dialog from "react-native-dialog";
+import { Card, CardItem, Text, Body, Button } from "native-base";
 import RegisterButton from "./RegisterButton";
-import { ProgressDialog, ConfirmDialog } from "react-native-simple-dialogs";
+import {
+  ProgressDialog,
+  ConfirmDialog,
+  Dialog
+} from "react-native-simple-dialogs";
 import NavigationService from "../../../../navigation/NavigationService";
 
 const mapStateToProps = state => {
@@ -35,16 +37,18 @@ class CourseDetails extends Component {
     title: `${navigation.state.params.title ||
       navigation.state.params.courseName ||
       "Course Name"}`,
-    headerRight: !_.isUndefined(navigation.state.params.showAlert) ? (
-      <RegisterButton onPress={navigation.getParam("showAlert")} />
-    ) : (
-      <View />
-    )
+    headerRight:
+      !_.isUndefined(navigation.state.params.showAlert) &&
+      !_.isUndefined(navigation.state.params.showRegister) ? (
+        <RegisterButton onPress={navigation.getParam("showAlert")} />
+      ) : (
+        <View />
+      )
   });
 
   constructor(props) {
     super(props);
-    this.state = { showAlert: false };
+    this.state = { showAlert: false, showMustRegister: false };
     this._showMoreText = this._showMoreText.bind(this);
     this.showAlert = this.showAlert.bind(this);
     this._registerOnCourse = this._registerOnCourse.bind(this);
@@ -86,16 +90,45 @@ class CourseDetails extends Component {
   }
 
   navigateToSingleLesson(item) {
+    if (this.props.navigation.state.params.showRegister) {
+      this.setState({ showMustRegister: true });
+      return;
+    }
     this.props.selectLesson(item);
     let { name } = item;
     NavigationService.navigateTopStack("SingleLesson", { name });
   }
+  closeDialog = () => this.setState({ showMustRegister: false });
 
   render() {
     let { showAlert } = this.state;
 
     return (
       <ScrollView style={style.courseDetails}>
+        <Dialog
+          visible={this.state.showMustRegister}
+          onTouchOutside={this.closeDialog}
+        >
+          <View
+            style={{
+              flexDirection: "column",
+              justifyContent: "center",
+              alignItems: "center",
+              width: "100%"
+            }}
+          >
+            <Text>
+              For visiting this lesson you must register on this course
+            </Text>
+            <Button
+              onPress={this.closeDialog}
+              bordered
+              style={{ alignSelf: "center", marginTop: 20 }}
+            >
+              <Text>Close</Text>
+            </Button>
+          </View>
+        </Dialog>
         <ConfirmDialog
           title="Register"
           message="Are you sure to register in this course?"
@@ -148,7 +181,7 @@ class CourseDetails extends Component {
         </View>
         <ProgressDialog
           visible={this.props.register.fetching}
-          title="Progress Dialog"
+          title="Register on course"
           message="Please, wait..."
         />
       </ScrollView>

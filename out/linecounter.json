@@ -1,0 +1,494 @@
+{
+    "extension": "linecounter",
+    "version": "0.2.2",
+    "workspace": "g:\\projects\\raji project\\MoonLesson",
+    "linecount": [
+        {
+            "version": "0.2.2",
+            "counttime": "2018-11-25 17:36:59",
+            "filesum": 74,
+            "codesum": 3161,
+            "commentsum": 83,
+            "blanksum": 246,
+            "statistics": {
+                "": {
+                    "code": 11,
+                    "comment": 1,
+                    "blank": 2
+                },
+                ".js": {
+                    "code": 3144,
+                    "comment": 82,
+                    "blank": 243
+                },
+                ".json": {
+                    "code": 4,
+                    "comment": 0,
+                    "blank": 0
+                },
+                ".md": {
+                    "code": 2,
+                    "comment": 0,
+                    "blank": 1
+                }
+            },
+            "filelist": [
+                {
+                    "blank": 0,
+                    "code": 6,
+                    "comment": 0,
+                    "filename": ".babelrc"
+                },
+                {
+                    "blank": 2,
+                    "code": 4,
+                    "comment": 1,
+                    "filename": ".buckconfig"
+                },
+                {
+                    "blank": 0,
+                    "code": 1,
+                    "comment": 0,
+                    "filename": ".gitattributes"
+                },
+                {
+                    "blank": 3,
+                    "code": 19,
+                    "comment": 7,
+                    "filename": "App.js"
+                },
+                {
+                    "blank": 0,
+                    "code": 4,
+                    "comment": 0,
+                    "filename": "app.json"
+                },
+                {
+                    "filename": "images\\cap.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "images\\class.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "images\\course.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "images\\date.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "images\\logo.jpg",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "images\\night.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "images\\price.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "images\\splash.jpg",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "images\\star.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "images\\student.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "images\\teacher.png",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "blank": 3,
+                    "code": 7,
+                    "comment": 1,
+                    "filename": "index.js"
+                },
+                {
+                    "blank": 1,
+                    "code": 2,
+                    "comment": 0,
+                    "filename": "README.md"
+                },
+                {
+                    "blank": 4,
+                    "code": 21,
+                    "comment": 0,
+                    "filename": "src\\components\\BackgroundImage.js"
+                },
+                {
+                    "blank": 1,
+                    "code": 18,
+                    "comment": 0,
+                    "filename": "src\\config\\colors.js"
+                },
+                {
+                    "blank": 1,
+                    "code": 18,
+                    "comment": 1,
+                    "filename": "src\\config\\images.js"
+                },
+                {
+                    "blank": 0,
+                    "code": 3,
+                    "comment": 0,
+                    "filename": "src\\config\\index.js"
+                },
+                {
+                    "blank": 1,
+                    "code": 23,
+                    "comment": 0,
+                    "filename": "src\\config\\strings.js"
+                },
+                {
+                    "blank": 4,
+                    "code": 8,
+                    "comment": 0,
+                    "filename": "src\\containers\\Auth\\index.js"
+                },
+                {
+                    "blank": 17,
+                    "code": 139,
+                    "comment": 5,
+                    "filename": "src\\containers\\Auth\\LoginScreen.js"
+                },
+                {
+                    "blank": 17,
+                    "code": 184,
+                    "comment": 12,
+                    "filename": "src\\containers\\Auth\\Register\\StudentComponent.js"
+                },
+                {
+                    "blank": 17,
+                    "code": 184,
+                    "comment": 12,
+                    "filename": "src\\containers\\Auth\\Register\\TeacherComponent.js"
+                },
+                {
+                    "blank": 3,
+                    "code": 92,
+                    "comment": 2,
+                    "filename": "src\\containers\\Auth\\Style.js"
+                },
+                {
+                    "blank": 0,
+                    "code": 170,
+                    "comment": 0,
+                    "filename": "src\\containers\\Home\\Courses\\CourseDetails\\fake.js"
+                },
+                {
+                    "blank": 12,
+                    "code": 150,
+                    "comment": 0,
+                    "filename": "src\\containers\\Home\\Courses\\CourseDetails\\index.js"
+                },
+                {
+                    "blank": 1,
+                    "code": 12,
+                    "comment": 0,
+                    "filename": "src\\containers\\Home\\Courses\\CourseDetails\\Lesson.js"
+                },
+                {
+                    "blank": 4,
+                    "code": 30,
+                    "comment": 0,
+                    "filename": "src\\containers\\Home\\Courses\\CourseDetails\\RegisterButton.js"
+                },
+                {
+                    "blank": 7,
+                    "code": 114,
+                    "comment": 0,
+                    "filename": "src\\containers\\Home\\Courses\\CourseDetails\\SingleLesson.js"
+                },
+                {
+                    "blank": 3,
+                    "code": 67,
+                    "comment": 2,
+                    "filename": "src\\containers\\Home\\Courses\\CourseDetails\\style.js"
+                },
+                {
+                    "blank": 3,
+                    "code": 63,
+                    "comment": 0,
+                    "filename": "src\\containers\\Home\\Courses\\CourseRow.js"
+                },
+                {
+                    "blank": 2,
+                    "code": 10,
+                    "comment": 0,
+                    "filename": "src\\containers\\Home\\Courses\\ImgeInfoRow.js"
+                },
+                {
+                    "blank": 5,
+                    "code": 73,
+                    "comment": 0,
+                    "filename": "src\\containers\\Home\\Courses\\index.js"
+                },
+                {
+                    "blank": 3,
+                    "code": 68,
+                    "comment": 1,
+                    "filename": "src\\containers\\Home\\Courses\\style.js"
+                },
+                {
+                    "blank": 3,
+                    "code": 58,
+                    "comment": 9,
+                    "filename": "src\\containers\\Home\\index.js"
+                },
+                {
+                    "blank": 13,
+                    "code": 157,
+                    "comment": 9,
+                    "filename": "src\\containers\\Home\\NewCourse\\index.js"
+                },
+                {
+                    "blank": 2,
+                    "code": 11,
+                    "comment": 0,
+                    "filename": "src\\containers\\Home\\NewCourse\\SaveButton.js"
+                },
+                {
+                    "blank": 4,
+                    "code": 58,
+                    "comment": 1,
+                    "filename": "src\\containers\\Home\\NewCourse\\style.js"
+                },
+                {
+                    "blank": 6,
+                    "code": 40,
+                    "comment": 0,
+                    "filename": "src\\containers\\Home\\Profile\\AddNewCourseButton.js"
+                },
+                {
+                    "blank": 3,
+                    "code": 73,
+                    "comment": 0,
+                    "filename": "src\\containers\\Home\\Profile\\index.js"
+                },
+                {
+                    "blank": 1,
+                    "code": 17,
+                    "comment": 0,
+                    "filename": "src\\containers\\Home\\Profile\\ProfileImage.js"
+                },
+                {
+                    "blank": 3,
+                    "code": 61,
+                    "comment": 0,
+                    "filename": "src\\containers\\Home\\Profile\\style.js"
+                },
+                {
+                    "blank": 1,
+                    "code": 19,
+                    "comment": 0,
+                    "filename": "src\\containers\\Home\\Profile\\Tabs\\Card.js"
+                },
+                {
+                    "blank": 2,
+                    "code": 13,
+                    "comment": 0,
+                    "filename": "src\\containers\\Home\\Profile\\Tabs\\EmptyView.js"
+                },
+                {
+                    "blank": 0,
+                    "code": 3,
+                    "comment": 0,
+                    "filename": "src\\containers\\Home\\Profile\\Tabs\\index.js"
+                },
+                {
+                    "blank": 2,
+                    "code": 10,
+                    "comment": 0,
+                    "filename": "src\\containers\\Home\\Profile\\Tabs\\InformationRow.js"
+                },
+                {
+                    "blank": 6,
+                    "code": 62,
+                    "comment": 0,
+                    "filename": "src\\containers\\Home\\Profile\\Tabs\\MyCourses.js"
+                },
+                {
+                    "blank": 4,
+                    "code": 41,
+                    "comment": 0,
+                    "filename": "src\\containers\\Home\\Profile\\Tabs\\Second.js"
+                },
+                {
+                    "blank": 3,
+                    "code": 48,
+                    "comment": 0,
+                    "filename": "src\\containers\\Home\\Profile\\Tabs\\SingleCourse.js"
+                },
+                {
+                    "blank": 3,
+                    "code": 108,
+                    "comment": 0,
+                    "filename": "src\\containers\\Home\\Profile\\Tabs\\style.js"
+                },
+                {
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0,
+                    "filename": "src\\containers\\Home\\Profile\\Tabs\\Third.js"
+                },
+                {
+                    "blank": 2,
+                    "code": 18,
+                    "comment": 0,
+                    "filename": "src\\containers\\Layouts\\Header\\index.js"
+                },
+                {
+                    "blank": 3,
+                    "code": 18,
+                    "comment": 2,
+                    "filename": "src\\containers\\Layouts\\Header\\style.js"
+                },
+                {
+                    "blank": 12,
+                    "code": 97,
+                    "comment": 0,
+                    "filename": "src\\containers\\Splash\\index.js"
+                },
+                {
+                    "blank": 3,
+                    "code": 6,
+                    "comment": 0,
+                    "filename": "src\\containers\\Splash\\style.js"
+                },
+                {
+                    "blank": 2,
+                    "code": 31,
+                    "comment": 0,
+                    "filename": "src\\navigation\\Navigation.js"
+                },
+                {
+                    "blank": 5,
+                    "code": 31,
+                    "comment": 1,
+                    "filename": "src\\navigation\\NavigationService.js"
+                },
+                {
+                    "blank": 7,
+                    "code": 29,
+                    "comment": 0,
+                    "filename": "src\\navigation\\NavigatorReduxIntegration.js"
+                },
+                {
+                    "blank": 1,
+                    "code": 33,
+                    "comment": 0,
+                    "filename": "src\\redux\\api\\AuthApi.js"
+                },
+                {
+                    "blank": 4,
+                    "code": 19,
+                    "comment": 10,
+                    "filename": "src\\redux\\api\\Config.js"
+                },
+                {
+                    "blank": 1,
+                    "code": 31,
+                    "comment": 0,
+                    "filename": "src\\redux\\api\\CoursesApi.js"
+                },
+                {
+                    "blank": 1,
+                    "code": 13,
+                    "comment": 0,
+                    "filename": "src\\redux\\api\\ProfileApi.js"
+                },
+                {
+                    "blank": 1,
+                    "code": 13,
+                    "comment": 0,
+                    "filename": "src\\redux\\index.js"
+                },
+                {
+                    "blank": 3,
+                    "code": 215,
+                    "comment": 5,
+                    "filename": "src\\redux\\reducers\\Auth.js"
+                },
+                {
+                    "blank": 2,
+                    "code": 66,
+                    "comment": 0,
+                    "filename": "src\\redux\\reducers\\Course.js"
+                },
+                {
+                    "blank": 2,
+                    "code": 57,
+                    "comment": 0,
+                    "filename": "src\\redux\\reducers\\Profile.js"
+                },
+                {
+                    "blank": 11,
+                    "code": 86,
+                    "comment": 1,
+                    "filename": "src\\redux\\saga\\Auth.js"
+                },
+                {
+                    "blank": 7,
+                    "code": 49,
+                    "comment": 0,
+                    "filename": "src\\redux\\saga\\Courses.js"
+                },
+                {
+                    "blank": 2,
+                    "code": 17,
+                    "comment": 0,
+                    "filename": "src\\redux\\saga\\index.js"
+                },
+                {
+                    "blank": 7,
+                    "code": 63,
+                    "comment": 1,
+                    "filename": "src\\redux\\saga\\Profile.js"
+                }
+            ]
+        }
+    ]
+}

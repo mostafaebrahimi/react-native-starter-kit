@@ -30,7 +30,7 @@ const style = StyleSheet.create({
     fontWeight: "300"
   },
   topHalf: {
-    flex: 0.4,
+    flex: 0.5,
     alignContent: "center",
     justifyContent: "center",
     backgroundColor: "#fff"

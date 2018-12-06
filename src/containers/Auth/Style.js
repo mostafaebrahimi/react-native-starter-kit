@@ -14,7 +14,7 @@ const style = StyleSheet.create({
   textInput: {
     alignSelf: "flex-end",
     textAlign: "center",
-    color: "#FFF"
+    color: "#000"
   },
   logo: {
     width: width / 4,
@@ -34,7 +34,7 @@ const style = StyleSheet.create({
   },
   darkBoxWithOpacity: {
     height: (height / 3) * 2,
-    backgroundColor: "rgba(0,0,0,0.3)",
+    backgroundColor: "#fff",
     fontSize: 30,
     borderRadius: 10,
     width: (width / 6) * 5,
@@ -60,15 +60,15 @@ const style = StyleSheet.create({
   submitButton: {
     width: "40%",
     alignSelf: "center",
-    borderColor: "#FFF",
+    borderColor: "rgba(0,0,0,0.6)",
     borderRadius: 30,
     borderWidth: 1,
-    marginTop: 10,
+    marginTop: 15,
     padding: 8,
     backgroundColor: Colors.splash.submitButton.Background
   },
   submitButtonText: {
-    color: Colors.splash.submitButton.Color,
+    color: Colors.splash.submitButton.ColorBTN,
     fontSize: 16,
     width: "100%",
     alignSelf: "center",

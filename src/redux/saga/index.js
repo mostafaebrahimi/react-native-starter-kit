@@ -2,7 +2,8 @@ import { all } from "redux-saga/effects";
 import {
   registerStudentWatcher,
   registerTeacherWatcher,
-  loginWatcher
+  loginWatcher,
+  getUserWatcher
 } from "./Auth";
 
 import { getCoursesWatcher, registerCourseCallWatcher } from "./Courses";
@@ -14,6 +15,7 @@ export default function* rootWatcher() {
     registerTeacherWatcher(),
     loginWatcher(),
     getCoursesWatcher(),
-    registerCourseCallWatcher()
+    registerCourseCallWatcher(),
+    getUserWatcher()
   ]);
 }

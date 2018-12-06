@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { View, Text, TouchableWithoutFeedback } from "react-native";
+import { View, Text, TouchableWithoutFeedback, FlatList } from "react-native";
 import style from "./style";
 import ImageLoad from "react-native-image-placeholder";
 import { connect } from "react-redux";
@@ -7,18 +7,23 @@ import _ from "lodash";
 import EmptyView from "./EmptyView";
 import SingleCourse from "./SingleCourse";
 import { AuthActionsGenerator } from "../../../../redux/reducers/Auth";
+import { CourseActionsGenerator } from "../../../../redux/reducers/Course";
 import NavigationService from "../../../../navigation/NavigationService";
+import CourseRow from "../../Courses/CourseRow";
 
 const mapStateToProps = state => {
   return {
-    user: state.auth.user
+    user: state.auth.user,
+    courses: state.auth.courses
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    selectCourse: payload =>
-      dispatch(AuthActionsGenerator.auth.selectccourse(payload))
+    selectCourseAuth: payload =>
+      dispatch(AuthActionsGenerator.auth.selectCourse(payload)),
+    selectCourseCourse: course =>
+      dispatch(CourseActionsGenerator.course.selectCourse(course))
   };
 };
 
@@ -26,12 +31,24 @@ class MyCourses extends Component {
   constructor(props) {
     super(props);
     this.state = {};
-    this._changeToDetailsRoute = this._changeToDetailsRoute.bind(this);
+    this._onCardPress = this._onCardPress.bind(this);
   }
 
-  _changeToDetailsRoute(item) {
-    this.props.selectCourse(item);
-    NavigationService.navigateTopStack("Course");
+  _onCardPress(item) {
+    let that = this;
+    return function() {
+      that.props.selectCourseAuth(item);
+      that.props.selectCourseCourse(item);
+      NavigationService.navigateTopStack("Course", { title: item.courseName });
+    };
+  }
+
+  _onScrollEndDrag() {
+    console.log("dragging 1");
+  }
+
+  _onScrollBeginDrag() {
+    console.log("dragging 2");
   }
 
   render() {
@@ -40,13 +57,20 @@ class MyCourses extends Component {
       return (
         <View style={style.tabsScreen}>
           <FlatList
+            onScrollEndDrag={this._onScrollEndDrag}
+            onScrollBeginDrag={this._onScrollBeginDrag}
             data={courses}
             renderItem={({ item }) => (
               <CourseRow
-                teacher={item.teacher || "Not Teacher Yet"}
-                courseName={item.name}
-                startDate={item.start_date}
-                onPress={this._changeToDetailsRoute(item)}
+                image={item.course.image}
+                teacher={item.course.teacher}
+                courseName={item.course.name}
+                studentNumber={
+                  (item.course.students && item.course.students.length) || 0
+                }
+                cost={item.course.cost}
+                startDate={new Date(item.course.start_time).toString()}
+                onPress={this._onCardPress(item.course)}
               />
             )}
           />

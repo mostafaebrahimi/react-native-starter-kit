@@ -1,4 +1,5 @@
 import { NavigationActions } from "react-navigation";
+import { StackActions } from "react-navigation";
 
 let _navigator;
 let _tabNavigator;
@@ -12,6 +13,15 @@ function setTabNavigator(tabNavigator) {
 function navigateTopStack(routeName, params) {
   _navigator.dispatch(
     NavigationActions.navigate({
+      routeName,
+      params
+    })
+  );
+}
+
+function replaceTopStack(routeName, params) {
+  _navigator.dispatch(
+    StackActions.replace({
       routeName,
       params
     })
@@ -33,5 +43,6 @@ export default {
   navigateTopStack,
   navigateTab,
   setTopLevelNavigator,
-  setTabNavigator
+  setTabNavigator,
+  replaceTopStack
 };
